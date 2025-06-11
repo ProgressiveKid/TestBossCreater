@@ -49,8 +49,8 @@ namespace TestBossCreater.Pages
                 }
             }
         }
-        public Test CreatableTest = new Test() { Name = "На дебила"};
-        public List<Question> CreatableQuestions = new List<Question>();
+        public Test CreatableTest = new Test() { Name = "На дебила" };
+        public List<MultipleQuestion> CreatableQuestions = new List<MultipleQuestion>();
         public CreateTest()
         {
             InitializeComponent();
@@ -88,7 +88,7 @@ namespace TestBossCreater.Pages
         /// Заполнить страницу информацией по вопросу
         /// </summary>
         /// <param name="question"></param>
-        private void ShowPageForProperty(Question question)
+        private void ShowPageForProperty(MultipleQuestion question)
         {
 
         }
@@ -105,7 +105,7 @@ namespace TestBossCreater.Pages
                 return false;
             }
 
-            var createdQuestion = new Question()
+            var createdQuestion = new MultipleQuestion()
             {
                 QuestionText = questionDescription.Text,
                 OptionA = richTextBox1.Text,
@@ -119,7 +119,7 @@ namespace TestBossCreater.Pages
         }
 
 
-        string GetCorrectOptionText(Question q)
+        string GetCorrectOptionText(MultipleQuestion q)
         {
             return q.CorrectOption switch
             {
@@ -203,12 +203,17 @@ namespace TestBossCreater.Pages
         }
 
         public void CheckDumpUser()
-        { 
+        {
             ErrorCount++;
             if (ErrorCount > 4)
             {
                 soundpad.PlayMp3(Path.Combine(Application.StartupPath, "Resources", "Sound", "errorSound.mp3"));
             }
+        }
+
+        private void CreateTest_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

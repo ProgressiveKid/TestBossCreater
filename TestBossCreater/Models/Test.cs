@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TestBossCreater.Models
 {
@@ -19,6 +14,6 @@ namespace TestBossCreater.Models
         public string Description { get; set; } = "";
 
         // Навигация: один тест → много вопросов
-        public List<Question> Questions { get; set; } = new();
+        public List<MultipleQuestion> Questions { get; set; } = new();
     }
 }

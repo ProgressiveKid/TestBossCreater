@@ -66,6 +66,7 @@ namespace TestBossCreater
             dataGridView1.RowTemplate.Height = 29;
             dataGridView1.Size = new Size(378, 372);
             dataGridView1.TabIndex = 2;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // pictureBoxDataGrid
             // 

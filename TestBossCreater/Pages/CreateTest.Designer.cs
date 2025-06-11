@@ -262,6 +262,7 @@
             Controls.Add(button1);
             Name = "CreateTest";
             Text = "CreateTest";
+            Load += CreateTest_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

@@ -16,5 +16,10 @@ namespace TestBossCreater.Pages
         {
             InitializeComponent();
         }
+
+        private void PassTest_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
