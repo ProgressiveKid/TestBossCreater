@@ -7,10 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.EntityFrameworkCore;
 using TestBossCreater.Models;
+using TestBossCreater.Models.Consts;
 using TestBossCreater.Service.Navigation;
 using TestBossCreater.Service.Soundpad;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using GroupBox = System.Windows.Forms.GroupBox;
+using RadioButton = System.Windows.Forms.RadioButton;
 
 namespace TestBossCreater.Pages
 {
@@ -49,12 +53,13 @@ namespace TestBossCreater.Pages
                 }
             }
         }
-        public Test CreatableTest = new Test() { Name = "На дебила" };
-        public List<MultipleQuestion> CreatableQuestions = new List<MultipleQuestion>();
-        public CreateTest()
+        public Test CreatableTest = new Test() { Title = "На дебила" };
+        public List<BaseQuestion> CreatableQuestions = new List<BaseQuestion>();
+        public CreateTest(string currentUser)
         {
             InitializeComponent();
             _context = new AppDbContext();
+            HideAllTabPage();
         }
 
         /// <summary>
@@ -79,18 +84,46 @@ namespace TestBossCreater.Pages
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
+            // Проверка, чтобы не добавить редактируемый вопрос
+            if (CurPage < CreatableQuestions.Count &&
+                CreatableQuestions[CurPage]?.QuestionText != string.Empty)
+            {
+                Console.WriteLine();
+            }
             if (!CreateQuestion())
                 return;
             CurPage++;
+            ClearPageForNewQuestion();
         }
 
         /// <summary>
         /// Заполнить страницу информацией по вопросу
         /// </summary>
         /// <param name="question"></param>
-        private void ShowPageForProperty(MultipleQuestion question)
+        private void ShowPageForProperty(BaseQuestion question)
         {
-
+            switch (question)
+            {
+                case MultipleQuestion multipleQuestion:
+                    questionDescription.Text = multipleQuestion.QuestionText;
+                    MultipleARichTextBox.Text = multipleQuestion.OptionA;
+                    MultipleBRichTextBox.Text = multipleQuestion.OptionB;
+                    MultipleCRichTextBox.Text = multipleQuestion.OptionC;
+                    MultipleDRichTextBox.Text = multipleQuestion.OptionD;
+                    switch (multipleQuestion.CorrectOption)
+                    {
+                        case "A": radioButtonA.Checked = true; break;
+                        case "B": radioButtonB.Checked = true; break;
+                        case "C": radioButtonC.Checked = true; break;
+                        case "D": radioButtonD.Checked = true; break;
+                    }
+                    break;
+                case RangeQuestion rangeQuestion:
+                    questionDescription.Text = rangeQuestion.QuestionText;
+                    RangeFirstRichTextBox.Text = rangeQuestion.MinValue.ToString();
+                    RangeSecondRichTextBox.Text = rangeQuestion.MaxValue.ToString();
+                    break;
+            }
         }
 
         /// <summary>
@@ -99,22 +132,38 @@ namespace TestBossCreater.Pages
         /// <param name="question"></param>
         private bool CreateQuestion()
         {
-            if (!ValidateQuestionInputs())
+            //if (!ValidateQuestionInputs())
+            //{
+            //    CheckDumpUser();
+            //    return false;
+            //}
+            switch (TypeOfQuestion)
             {
-                CheckDumpUser();
-                return false;
+                case TypeQuestions.MultipleChoise:
+                    var createdMultipleQuestion = new MultipleQuestion()
+                    {
+                        QuestionText = questionDescription.Text,
+                        OptionA = MultipleARichTextBox.Text,
+                        OptionB = MultipleBRichTextBox.Text,
+                        OptionC = MultipleCRichTextBox.Text,
+                        OptionD = MultipleDRichTextBox.Text,
+                        CorrectOption = SelectedOption
+                    };
+                    CreatableQuestions.Add(createdMultipleQuestion);
+                    break;
+                case TypeQuestions.RangeChoise:
+                    var createdRangeQuestion = new RangeQuestion()
+                    {
+                        QuestionText = questionDescription.Text,
+                        MinValue = Convert.ToInt32(RangeFirstRichTextBox.Text),
+                        MaxValue = Convert.ToInt32(RangeSecondRichTextBox.Text)
+                    };
+                    CreatableQuestions.Add(createdRangeQuestion);
+                    break;
+
+
             }
 
-            var createdQuestion = new MultipleQuestion()
-            {
-                QuestionText = questionDescription.Text,
-                OptionA = richTextBox1.Text,
-                OptionB = richTextBox2.Text,
-                OptionC = richTextBox3.Text,
-                OptionD = richTextBox4.Text,
-                CorrectOption = SelectedOption
-            };
-            CreatableQuestions.Add(createdQuestion);
             return true;
         }
 
@@ -147,7 +196,7 @@ namespace TestBossCreater.Pages
             int testId = CreatableTest.Id;
             // кажому вопросу теста присвоили его принадлежность к тесту
             CreatableQuestions.ForEach(x => x.TestId = testId);
-            _context.Questions.AddRange(CreatableQuestions);
+            _context.AddRange(CreatableQuestions);
             _context.SaveChanges();
             Navigation.ShowMainMenu(this); // передаётся экземляр текущего класса  CreateTest : Form
         }
@@ -171,31 +220,31 @@ namespace TestBossCreater.Pages
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(richTextBox1.Text))
+            if (string.IsNullOrWhiteSpace(MultipleARichTextBox.Text))
             {
                 MessageBox.Show("Заполни вариант ответа А!");
-                richTextBox1.Focus();
+                MultipleARichTextBox.Focus();
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(richTextBox2.Text))
+            if (string.IsNullOrWhiteSpace(MultipleBRichTextBox.Text))
             {
                 MessageBox.Show("Заполни вариант ответа Б! ЖОПА");
-                richTextBox2.Focus();
+                MultipleBRichTextBox.Focus();
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(richTextBox3.Text))
+            if (string.IsNullOrWhiteSpace(MultipleDRichTextBox.Text))
             {
                 MessageBox.Show("Заполни вариант ответа В!");
-                richTextBox3.Focus();
+                MultipleDRichTextBox.Focus();
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(richTextBox4.Text))
+            if (string.IsNullOrWhiteSpace(MultipleCRichTextBox.Text))
             {
                 MessageBox.Show("Заполни вариант ответа Г!");
-                richTextBox4.Focus();
+                MultipleCRichTextBox.Focus();
                 return false;
             }
 
@@ -213,7 +262,98 @@ namespace TestBossCreater.Pages
 
         private void CreateTest_Load(object sender, EventArgs e)
         {
+            var allTests = _context.Tests
+                .Include(t => t.Questions).FirstOrDefault();
 
+            if (allTests != null)
+            {
+                var allQuestion = _context.Questions.Where(x => x.TestId == allTests.Id);
+            }
+            comboBox1.Items.AddRange(TypeQuestions.AllTypes);
+        }
+        private string TypeOfQuestion => comboBox1?.SelectedItem.ToString();
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedItem = comboBox1.SelectedItem.ToString();
+            HideAllTabPage();
+            ShowNeededTabPage(selectedItem);
+        }
+
+        private void HideAllTabPage()
+        {
+            tabControl1.TabPages.Remove(tabPage1);
+            tabControl1.TabPages.Remove(tabPage2);
+            tabControl1.TabPages.Remove(tabPage3);
+        }
+
+        private void ShowNeededTabPage(string typeQuestion)
+        {
+            switch (typeQuestion)
+            {
+                case TypeQuestions.MultipleChoise:
+                    tabControl1.TabPages.Add(tabPage1);
+                    break;
+                case TypeQuestions.RangeChoise:
+                    tabControl1.TabPages.Add(tabPage2);
+                    break;
+                case TypeQuestions.SingleChoise:
+                    tabControl1.TabPages.Add(tabPage3);
+                    break;
+            }
+        }
+
+        private void ClearPageForNewQuestion()
+        {
+            questionDescription.Clear();
+            foreach (TabPage tabPage in tabControl1.TabPages)
+            {
+                ClearControls(tabPage.Controls);
+            }
+        }
+
+        private void ClearControls(Control.ControlCollection controls)
+        {
+            foreach (Control control in controls)
+            {
+                switch (control)
+                {
+                    case RadioButton radioButton:
+                        radioButton.Checked = false;
+                        break;
+
+                    case RichTextBox richTextBox:
+                        richTextBox.Clear();
+                        break;
+
+                    case GroupBox or Panel or FlowLayoutPanel or TableLayoutPanel:
+                        // Рекурсивно очищаем вложенные контейнеры
+                        ClearControls(control.Controls);
+                        break;
+                }
+            }
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RangeFirstRichTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Разрешить цифры и управляющие символы (Backspace, Delete и т.п.)
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Отменить ввод
+            }
+        }
+
+        private void RangeSecondRichTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Разрешить цифры и управляющие символы (Backspace, Delete и т.п.)
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Отменить ввод
+            }
         }
     }
 }

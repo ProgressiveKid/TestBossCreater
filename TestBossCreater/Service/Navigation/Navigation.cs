@@ -12,10 +12,10 @@ namespace TestBossCreater.Service.Navigation
     /// </summary>
     public static class Navigation
     {
-        public static void ShowCreatePage(Form currentForm)
+        public static void ShowCreatePage(Form currentForm, string currentUser)
         {
             // Создаём экземпляр формы CreateTest
-            var createTestForm = new CreateTest();
+            var createTestForm = new CreateTest(currentUser);
 
             // Скрываем текущую главную форму (нельзя закрывать, потому что потушиться приложение)
             currentForm.Hide();
