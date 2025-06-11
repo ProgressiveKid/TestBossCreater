@@ -6,8 +6,7 @@ namespace TestBossCreater.Models
 {
     public class MultipleQuestion : BaseQuestion
     {
-        [Key]
-        public int Id { get; set; }
+        public string CorrectOption { get; set; }
 
         [Required]
         public string OptionA { get; set; } = string.Empty;
@@ -23,12 +22,9 @@ namespace TestBossCreater.Models
 
         public override string Type => TypeQuestions.MultipleChoise;
 
-        [Required]
-        public string CorrectOption { get; set; } = string.Empty; // ссылка на OptionX
-
         public override bool CheckAnswer()
         {
-            return UserOption == CorrectOption;
+            return CorrectOption == UserOption;
         }
     }
 }

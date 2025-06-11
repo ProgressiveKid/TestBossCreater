@@ -1,23 +1,28 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using TestBossCreater.Models.Consts;
+using TestBossCreater.Pages;
 
 namespace TestBossCreater.Models
 {
+
     public class RangeQuestion : BaseQuestion
     {
-        [Key]
-        public int Id { get; set; }
+        public double MinValue { get; set; }
+        public double MaxValue { get; set; }
+        //public double CorrectRange { get; set; }
 
-        public int minValue { get; set; }
-
-        public int maxValue { get; set; }
+        /// <summary>
+        /// Отклонение от диапазона правильного ответа
+        /// </summary>
+        //public int BaseDeviation { get; set; } = 10;
         public override string Type => TypeQuestions.RangeChoise;
 
         public override bool CheckAnswer()
         {
             int intIserAnswer = Convert.ToInt32(UserOption);
-            return minValue <= intIserAnswer && maxValue <= intIserAnswer;
+            return MinValue <= intIserAnswer &&
+                MaxValue <= intIserAnswer;
         }
     }
 }

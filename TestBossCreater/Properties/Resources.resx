@@ -121,4 +121,13 @@
   <data name="emptyDataGrid" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\emptyDataGrid.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ahillesMain" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ahillesMain.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ahilles" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ahilles.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ahillesMain1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ahillesMain1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

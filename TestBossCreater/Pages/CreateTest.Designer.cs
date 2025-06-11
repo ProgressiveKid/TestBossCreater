@@ -35,10 +35,10 @@
             radioButtonC = new RadioButton();
             radioButtonB = new RadioButton();
             radioButtonA = new RadioButton();
-            richTextBox4 = new RichTextBox();
-            richTextBox3 = new RichTextBox();
-            richTextBox2 = new RichTextBox();
-            richTextBox1 = new RichTextBox();
+            MultipleCRichTextBox = new RichTextBox();
+            MultipleDRichTextBox = new RichTextBox();
+            MultipleBRichTextBox = new RichTextBox();
+            MultipleARichTextBox = new RichTextBox();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
@@ -48,8 +48,21 @@
             pictureBox1 = new PictureBox();
             button3 = new Button();
             button4 = new Button();
+            comboBox1 = new ComboBox();
+            label6 = new Label();
+            tabControl1 = new TabControl();
+            tabPage1 = new TabPage();
+            tabPage2 = new TabPage();
+            label8 = new Label();
+            label7 = new Label();
+            RangeSecondRichTextBox = new RichTextBox();
+            RangeFirstRichTextBox = new RichTextBox();
+            tabPage3 = new TabPage();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            tabControl1.SuspendLayout();
+            tabPage1.SuspendLayout();
+            tabPage2.SuspendLayout();
             SuspendLayout();
             // 
             // button1
@@ -66,7 +79,7 @@
             // 
             button2.Location = new Point(12, 465);
             button2.Name = "button2";
-            button2.Size = new Size(51, 85);
+            button2.Size = new Size(68, 85);
             button2.TabIndex = 1;
             button2.Text = "Предыдущ";
             button2.UseVisualStyleBackColor = true;
@@ -78,15 +91,15 @@
             panel1.Controls.Add(radioButtonC);
             panel1.Controls.Add(radioButtonB);
             panel1.Controls.Add(radioButtonA);
-            panel1.Controls.Add(richTextBox4);
-            panel1.Controls.Add(richTextBox3);
-            panel1.Controls.Add(richTextBox2);
-            panel1.Controls.Add(richTextBox1);
+            panel1.Controls.Add(MultipleCRichTextBox);
+            panel1.Controls.Add(MultipleDRichTextBox);
+            panel1.Controls.Add(MultipleBRichTextBox);
+            panel1.Controls.Add(MultipleARichTextBox);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(95, 462);
+            panel1.Location = new Point(20, 6);
             panel1.Name = "panel1";
             panel1.Size = new Size(611, 193);
             panel1.TabIndex = 2;
@@ -94,7 +107,7 @@
             // radioButtonD
             // 
             radioButtonD.AutoSize = true;
-            radioButtonD.Location = new Point(568, 149);
+            radioButtonD.Location = new Point(576, 149);
             radioButtonD.MaximumSize = new Size(25, 25);
             radioButtonD.Name = "radioButtonD";
             radioButtonD.Size = new Size(17, 16);
@@ -105,7 +118,7 @@
             // radioButtonC
             // 
             radioButtonC.AutoSize = true;
-            radioButtonC.Location = new Point(568, 111);
+            radioButtonC.Location = new Point(576, 111);
             radioButtonC.MaximumSize = new Size(25, 25);
             radioButtonC.Name = "radioButtonC";
             radioButtonC.Size = new Size(17, 16);
@@ -116,7 +129,7 @@
             // radioButtonB
             // 
             radioButtonB.AutoSize = true;
-            radioButtonB.Location = new Point(568, 64);
+            radioButtonB.Location = new Point(576, 69);
             radioButtonB.MaximumSize = new Size(25, 25);
             radioButtonB.Name = "radioButtonB";
             radioButtonB.Size = new Size(17, 16);
@@ -127,7 +140,7 @@
             // radioButtonA
             // 
             radioButtonA.AutoSize = true;
-            radioButtonA.Location = new Point(568, 28);
+            radioButtonA.Location = new Point(576, 33);
             radioButtonA.MaximumSize = new Size(25, 25);
             radioButtonA.Name = "radioButtonA";
             radioButtonA.Size = new Size(17, 16);
@@ -135,42 +148,42 @@
             radioButtonA.TabStop = true;
             radioButtonA.UseVisualStyleBackColor = true;
             // 
-            // richTextBox4
+            // MultipleCRichTextBox
             // 
-            richTextBox4.Location = new Point(67, 104);
-            richTextBox4.Name = "richTextBox4";
-            richTextBox4.Size = new Size(495, 16);
-            richTextBox4.TabIndex = 7;
-            richTextBox4.Text = "";
+            MultipleCRichTextBox.Location = new Point(67, 104);
+            MultipleCRichTextBox.Name = "MultipleCRichTextBox";
+            MultipleCRichTextBox.Size = new Size(495, 32);
+            MultipleCRichTextBox.TabIndex = 7;
+            MultipleCRichTextBox.Text = "";
             // 
-            // richTextBox3
+            // MultipleDRichTextBox
             // 
-            richTextBox3.Location = new Point(67, 142);
-            richTextBox3.Name = "richTextBox3";
-            richTextBox3.Size = new Size(495, 16);
-            richTextBox3.TabIndex = 6;
-            richTextBox3.Text = "";
+            MultipleDRichTextBox.Location = new Point(67, 142);
+            MultipleDRichTextBox.Name = "MultipleDRichTextBox";
+            MultipleDRichTextBox.Size = new Size(495, 28);
+            MultipleDRichTextBox.TabIndex = 6;
+            MultipleDRichTextBox.Text = "";
             // 
-            // richTextBox2
+            // MultipleBRichTextBox
             // 
-            richTextBox2.Location = new Point(67, 64);
-            richTextBox2.Name = "richTextBox2";
-            richTextBox2.Size = new Size(495, 16);
-            richTextBox2.TabIndex = 5;
-            richTextBox2.Text = "";
+            MultipleBRichTextBox.Location = new Point(67, 64);
+            MultipleBRichTextBox.Name = "MultipleBRichTextBox";
+            MultipleBRichTextBox.Size = new Size(495, 34);
+            MultipleBRichTextBox.TabIndex = 5;
+            MultipleBRichTextBox.Text = "";
             // 
-            // richTextBox1
+            // MultipleARichTextBox
             // 
-            richTextBox1.Location = new Point(67, 28);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(495, 16);
-            richTextBox1.TabIndex = 4;
-            richTextBox1.Text = "";
+            MultipleARichTextBox.Location = new Point(67, 28);
+            MultipleARichTextBox.Name = "MultipleARichTextBox";
+            MultipleARichTextBox.Size = new Size(495, 30);
+            MultipleARichTextBox.TabIndex = 4;
+            MultipleARichTextBox.Text = "";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(11, 145);
+            label4.Location = new Point(22, 142);
             label4.Name = "label4";
             label4.Size = new Size(20, 20);
             label4.TabIndex = 3;
@@ -179,7 +192,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(11, 107);
+            label3.Location = new Point(21, 107);
             label3.Name = "label3";
             label3.Size = new Size(18, 20);
             label3.TabIndex = 2;
@@ -188,7 +201,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(11, 57);
+            label2.Location = new Point(22, 67);
             label2.Name = "label2";
             label2.Size = new Size(18, 20);
             label2.TabIndex = 1;
@@ -197,7 +210,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(11, 26);
+            label1.Location = new Point(21, 31);
             label1.Name = "label1";
             label1.Size = new Size(19, 20);
             label1.TabIndex = 0;
@@ -205,7 +218,7 @@
             // 
             // questionDescription
             // 
-            questionDescription.Location = new Point(162, 353);
+            questionDescription.Location = new Point(122, 353);
             questionDescription.Name = "questionDescription";
             questionDescription.Size = new Size(495, 87);
             questionDescription.TabIndex = 8;
@@ -214,7 +227,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(77, 356);
+            label5.Location = new Point(22, 353);
             label5.Name = "label5";
             label5.Size = new Size(79, 20);
             label5.TabIndex = 8;
@@ -242,22 +255,125 @@
             // 
             button4.Location = new Point(12, 566);
             button4.Name = "button4";
-            button4.Size = new Size(51, 85);
+            button4.Size = new Size(68, 85);
             button4.TabIndex = 11;
             button4.Text = "Выйти";
             button4.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(637, 385);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(151, 28);
+            comboBox1.TabIndex = 12;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(663, 356);
+            label6.Name = "label6";
+            label6.Size = new Size(98, 20);
+            label6.TabIndex = 13;
+            label6.Text = "Тип вопроса";
+            // 
+            // tabControl1
+            // 
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(tabPage3);
+            tabControl1.Location = new Point(86, 446);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(642, 360);
+            tabControl1.TabIndex = 14;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Controls.Add(panel1);
+            tabPage1.Location = new Point(4, 29);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(634, 327);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "Тестовый вопрос";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(label8);
+            tabPage2.Controls.Add(label7);
+            tabPage2.Controls.Add(RangeSecondRichTextBox);
+            tabPage2.Controls.Add(RangeFirstRichTextBox);
+            tabPage2.Location = new Point(4, 29);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(634, 327);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Вопрос с диапазоном";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(16, 98);
+            label8.Name = "label8";
+            label8.Size = new Size(56, 20);
+            label8.TabIndex = 3;
+            label8.Text = "Между";
+            label8.Click += label8_Click;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(315, 98);
+            label7.Name = "label7";
+            label7.Size = new Size(20, 20);
+            label7.TabIndex = 2;
+            label7.Text = "И";
+            // 
+            // RangeSecondRichTextBox
+            // 
+            RangeSecondRichTextBox.Location = new Point(395, 91);
+            RangeSecondRichTextBox.Name = "RangeSecondRichTextBox";
+            RangeSecondRichTextBox.Size = new Size(184, 39);
+            RangeSecondRichTextBox.TabIndex = 1;
+            RangeSecondRichTextBox.Text = "";
+            RangeSecondRichTextBox.KeyPress += RangeSecondRichTextBox_KeyPress;
+            // 
+            // RangeFirstRichTextBox
+            // 
+            RangeFirstRichTextBox.Location = new Point(78, 91);
+            RangeFirstRichTextBox.Name = "RangeFirstRichTextBox";
+            RangeFirstRichTextBox.Size = new Size(184, 39);
+            RangeFirstRichTextBox.TabIndex = 0;
+            RangeFirstRichTextBox.Text = "";
+            RangeFirstRichTextBox.KeyPress += RangeFirstRichTextBox_KeyPress;
+            // 
+            // tabPage3
+            // 
+            tabPage3.Location = new Point(4, 29);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new Padding(3);
+            tabPage3.Size = new Size(634, 327);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "Конкретный ответ";
+            tabPage3.UseVisualStyleBackColor = true;
             // 
             // CreateTest
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 673);
+            ClientSize = new Size(800, 678);
+            Controls.Add(tabControl1);
+            Controls.Add(label6);
+            Controls.Add(comboBox1);
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(pictureBox1);
             Controls.Add(label5);
             Controls.Add(questionDescription);
-            Controls.Add(panel1);
             Controls.Add(button2);
             Controls.Add(button1);
             Name = "CreateTest";
@@ -266,6 +382,10 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            tabControl1.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -275,10 +395,10 @@
         private Button button1;
         private Button button2;
         private Panel panel1;
-        private RichTextBox richTextBox4;
-        private RichTextBox richTextBox3;
-        private RichTextBox richTextBox2;
-        private RichTextBox richTextBox1;
+        private RichTextBox MultipleCRichTextBox;
+        private RichTextBox MultipleDRichTextBox;
+        private RichTextBox MultipleBRichTextBox;
+        private RichTextBox MultipleARichTextBox;
         private Label label4;
         private Label label3;
         private Label label2;
@@ -292,5 +412,15 @@
         private PictureBox pictureBox1;
         private Button button3;
         private Button button4;
+        private ComboBox comboBox1;
+        private Label label6;
+        private TabControl tabControl1;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
+        private TabPage tabPage3;
+        private Label label8;
+        private Label label7;
+        private RichTextBox RangeSecondRichTextBox;
+        private RichTextBox RangeFirstRichTextBox;
     }
 }
