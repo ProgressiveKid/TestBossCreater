@@ -10,19 +10,19 @@ namespace TestBossCreater.Models
     {
         public double MinValue { get; set; }
         public double MaxValue { get; set; }
-        //public double CorrectRange { get; set; }
+        public double CorrectRange { get; set; }
 
         /// <summary>
         /// Отклонение от диапазона правильного ответа
         /// </summary>
-        //public int BaseDeviation { get; set; } = 10;
+        public int BaseDeviation { get; set; } = 10;
         public override string Type => TypeQuestions.RangeChoise;
 
         public override bool CheckAnswer()
         {
             int intIserAnswer = Convert.ToInt32(UserOption);
-            return MinValue <= intIserAnswer &&
-                MaxValue <= intIserAnswer;
+            return MinValue + BaseDeviation <= intIserAnswer &&
+                MaxValue - BaseDeviation <= intIserAnswer;
         }
     }
 }

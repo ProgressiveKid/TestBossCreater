@@ -16,7 +16,7 @@ public class AppDbContext : DbContext
         {
             // для пересоздания бд, чтобы не накатывать миграции
             //Database.EnsureDeleted();
-           // Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
         else
         {

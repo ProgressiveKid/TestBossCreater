@@ -24,6 +24,7 @@ namespace TestBossCreater.Pages
 
         public SoundpadClass soundpad = new SoundpadClass();
 
+        public string _currentUser;
         public int ErrorCount = 0;
         public int CurPage = 0;
         public string SelectedOption
@@ -53,12 +54,14 @@ namespace TestBossCreater.Pages
                 }
             }
         }
-        public Test CreatableTest = new Test() { Title = "На дебила" };
+        public Test CreatableTest = new Test() { Title = "На дебила"};
         public List<BaseQuestion> CreatableQuestions = new List<BaseQuestion>();
         public CreateTest(string currentUser)
         {
-            InitializeComponent();
             _context = new AppDbContext();
+            _currentUser = currentUser;
+            CreatableTest.Creater = currentUser;
+            InitializeComponent();
             HideAllTabPage();
         }
 
@@ -84,14 +87,20 @@ namespace TestBossCreater.Pages
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            // Проверка, чтобы не добавить редактируемый вопрос
+            // Проверка, чтобы проверить добавляем
             if (CurPage < CreatableQuestions.Count &&
                 CreatableQuestions[CurPage]?.QuestionText != string.Empty)
             {
-                Console.WriteLine();
+                // Редактируем старый
+                var question = CreatableQuestions[CurPage];
+                UpdateQuestion(question);
+                comboBox1.SelectedItem = question.Type;
             }
-            if (!CreateQuestion())
-                return;
+            else
+            { // добавляем новый вопрос
+                if (!CreateQuestion())
+                    return;
+            }
             CurPage++;
             ClearPageForNewQuestion();
         }
@@ -127,7 +136,7 @@ namespace TestBossCreater.Pages
         }
 
         /// <summary>
-        /// Заполнить страницу информацией по вопросу
+        /// Создать вопрос
         /// </summary>
         /// <param name="question"></param>
         private bool CreateQuestion()
@@ -155,6 +164,7 @@ namespace TestBossCreater.Pages
                     var createdRangeQuestion = new RangeQuestion()
                     {
                         QuestionText = questionDescription.Text,
+                        BaseDeviation = Convert.ToInt32(RangeDeviationRichTextBox.Text),
                         MinValue = Convert.ToInt32(RangeFirstRichTextBox.Text),
                         MaxValue = Convert.ToInt32(RangeSecondRichTextBox.Text)
                     };
@@ -167,18 +177,38 @@ namespace TestBossCreater.Pages
             return true;
         }
 
-
-        string GetCorrectOptionText(MultipleQuestion q)
+        /// <summary>
+        /// Обновить вопрос
+        /// </summary>
+        /// <param name="question"></param>
+        private bool UpdateQuestion(BaseQuestion question)
         {
-            return q.CorrectOption switch
+            //if (!ValidateQuestionInputs())
+            //{
+            //    CheckDumpUser();
+            //    return false;
+            //}
+            switch (question)
             {
-                "A" => q.OptionA,
-                "B" => q.OptionB,
-                "C" => q.OptionC,
-                "D" => q.OptionD,
-                _ => ""
-            };
+                case MultipleQuestion multipleQuestion:
+                        multipleQuestion.QuestionText = questionDescription.Text;
+                        multipleQuestion.OptionA = MultipleARichTextBox.Text;
+                        multipleQuestion.OptionB = MultipleBRichTextBox.Text;
+                        multipleQuestion.OptionC = MultipleCRichTextBox.Text;
+                        multipleQuestion.OptionD = MultipleDRichTextBox.Text;
+                        multipleQuestion.CorrectOption = SelectedOption;
+                    break;
+                case RangeQuestion rangeQuestion:
+                    rangeQuestion.QuestionText = questionDescription.Text;
+                    rangeQuestion.BaseDeviation = Convert.ToInt32(RangeDeviationRichTextBox.Text);
+                    rangeQuestion.MinValue = Convert.ToInt32(RangeFirstRichTextBox.Text);
+                    rangeQuestion.MaxValue = Convert.ToInt32(RangeSecondRichTextBox.Text);
+                    break;
+            }
+
+            return true;
         }
+
 
         /// <summary>
         /// Закончить создание теста
@@ -189,7 +219,6 @@ namespace TestBossCreater.Pages
         {
             if (!CreateQuestion())
                 return;
-
             _context.Tests.Add(CreatableTest);
             _context.SaveChanges();
 
@@ -269,6 +298,7 @@ namespace TestBossCreater.Pages
             {
                 var allQuestion = _context.Questions.Where(x => x.TestId == allTests.Id);
             }
+            authorLabel.Text = $"Test Made By:\n {_currentUser}";
             comboBox1.Items.AddRange(TypeQuestions.AllTypes);
         }
         private string TypeOfQuestion => comboBox1?.SelectedItem.ToString();

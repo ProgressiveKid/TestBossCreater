@@ -53,11 +53,14 @@
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
+            label9 = new Label();
+            RangeDeviationRichTextBox = new RichTextBox();
             label8 = new Label();
             label7 = new Label();
             RangeSecondRichTextBox = new RichTextBox();
             RangeFirstRichTextBox = new RichTextBox();
             tabPage3 = new TabPage();
+            authorLabel = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabControl1.SuspendLayout();
@@ -302,6 +305,8 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(label9);
+            tabPage2.Controls.Add(RangeDeviationRichTextBox);
             tabPage2.Controls.Add(label8);
             tabPage2.Controls.Add(label7);
             tabPage2.Controls.Add(RangeSecondRichTextBox);
@@ -314,10 +319,27 @@
             tabPage2.Text = "Вопрос с диапазоном";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(53, 171);
+            label9.Name = "label9";
+            label9.Size = new Size(180, 20);
+            label9.TabIndex = 5;
+            label9.Text = "Допустимое отклонение";
+            // 
+            // RangeDeviationRichTextBox
+            // 
+            RangeDeviationRichTextBox.Location = new Point(239, 152);
+            RangeDeviationRichTextBox.Name = "RangeDeviationRichTextBox";
+            RangeDeviationRichTextBox.Size = new Size(184, 39);
+            RangeDeviationRichTextBox.TabIndex = 4;
+            RangeDeviationRichTextBox.Text = "";
+            // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(16, 98);
+            label8.Location = new Point(16, 110);
             label8.Name = "label8";
             label8.Size = new Size(56, 20);
             label8.TabIndex = 3;
@@ -327,7 +349,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(315, 98);
+            label7.Location = new Point(319, 110);
             label7.Name = "label7";
             label7.Size = new Size(20, 20);
             label7.TabIndex = 2;
@@ -335,7 +357,7 @@
             // 
             // RangeSecondRichTextBox
             // 
-            RangeSecondRichTextBox.Location = new Point(395, 91);
+            RangeSecondRichTextBox.Location = new Point(402, 91);
             RangeSecondRichTextBox.Name = "RangeSecondRichTextBox";
             RangeSecondRichTextBox.Size = new Size(184, 39);
             RangeSecondRichTextBox.TabIndex = 1;
@@ -361,11 +383,21 @@
             tabPage3.Text = "Конкретный ответ";
             tabPage3.UseVisualStyleBackColor = true;
             // 
+            // authorLabel
+            // 
+            authorLabel.AutoSize = true;
+            authorLabel.Location = new Point(12, 27);
+            authorLabel.Name = "authorLabel";
+            authorLabel.Size = new Size(93, 20);
+            authorLabel.TabIndex = 15;
+            authorLabel.Text = "Test MadeBy";
+            // 
             // CreateTest
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 678);
+            Controls.Add(authorLabel);
             Controls.Add(tabControl1);
             Controls.Add(label6);
             Controls.Add(comboBox1);
@@ -422,5 +454,8 @@
         private Label label7;
         private RichTextBox RangeSecondRichTextBox;
         private RichTextBox RangeFirstRichTextBox;
+        private Label label9;
+        private RichTextBox RangeDeviationRichTextBox;
+        private Label authorLabel;
     }
 }
