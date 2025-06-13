@@ -63,14 +63,14 @@
             label10 = new Label();
             TermTextBoxUserAnswer = new TextBox();
             authorLabel = new Label();
-            button6 = new Button();
-            button5 = new Button();
+            pictureBox2 = new PictureBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
             tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // button1
@@ -226,7 +226,7 @@
             // 
             // questionDescription
             // 
-            questionDescription.Location = new Point(162, 292);
+            questionDescription.Location = new Point(162, 336);
             questionDescription.Name = "questionDescription";
             questionDescription.Size = new Size(495, 87);
             questionDescription.TabIndex = 8;
@@ -235,7 +235,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(12, 295);
+            label5.Location = new Point(12, 339);
             label5.Name = "label5";
             label5.Size = new Size(142, 20);
             label5.TabIndex = 8;
@@ -243,9 +243,11 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.Image = Properties.Resources.ahillesMain;
             pictureBox1.Location = new Point(162, 27);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(495, 239);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 9;
             pictureBox1.TabStop = false;
             // 
@@ -255,7 +257,7 @@
             button3.Name = "button3";
             button3.Size = new Size(97, 70);
             button3.TabIndex = 10;
-            button3.Text = "Закончить";
+            button3.Text = "Завершить тест";
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
@@ -272,7 +274,7 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(348, 397);
+            comboBox1.Location = new Point(364, 284);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(151, 28);
             comboBox1.TabIndex = 12;
@@ -281,7 +283,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(229, 400);
+            label6.Location = new Point(245, 287);
             label6.Name = "label6";
             label6.Size = new Size(98, 20);
             label6.TabIndex = 13;
@@ -417,32 +419,24 @@
             authorLabel.TabIndex = 15;
             authorLabel.Text = "Test MadeBy";
             // 
-            // button6
+            // pictureBox2
             // 
-            button6.Location = new Point(7, 623);
-            button6.Name = "button6";
-            button6.Size = new Size(73, 41);
-            button6.TabIndex = 17;
-            button6.Text = "Удалить вопрос";
-            button6.UseVisualStyleBackColor = true;
-            button6.Click += button6_Click;
-            // 
-            // button5
-            // 
-            button5.Location = new Point(691, 232);
-            button5.Name = "button5";
-            button5.Size = new Size(94, 57);
-            button5.TabIndex = 18;
-            button5.Text = "Описание теста";
-            button5.UseVisualStyleBackColor = true;
+            pictureBox2.Cursor = Cursors.Hand;
+            pictureBox2.Image = Properties.Resources.deleteButton;
+            pictureBox2.Location = new Point(12, 604);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(59, 62);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 18;
+            pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
             // 
             // CreateTest
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(819, 678);
-            Controls.Add(button5);
-            Controls.Add(button6);
+            Controls.Add(pictureBox2);
             Controls.Add(authorLabel);
             Controls.Add(tabControl1);
             Controls.Add(label6);
@@ -466,6 +460,7 @@
             tabPage2.PerformLayout();
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -505,9 +500,8 @@
         private Label label9;
         private RichTextBox RangeDeviationRichTextBox;
         private Label authorLabel;
-        private Button button6;
         private Label label10;
         private TextBox TermTextBoxUserAnswer;
-        private Button button5;
+        private PictureBox pictureBox2;
     }
 }

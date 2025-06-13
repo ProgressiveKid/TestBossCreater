@@ -8,7 +8,7 @@ using TestBossCreater.Pages;
 namespace TestBossCreater.Service.Navigation
 {
     /// <summary>
-    /// Класс навигации между страницами
+    /// Вспомогательный класс навигации между страницами
     /// </summary>
     public static class Navigation
     {
@@ -38,10 +38,10 @@ namespace TestBossCreater.Service.Navigation
 
         }
 
-        public static void ShowPassTestPage(Form currentForm, int testId)
+        public static void ShowPassTestPage(Form currentForm, string currentUser, int testId)
         {
             // Создаём экземпляр формы CreateTest
-            var createTestForm = new PassTest(testId);
+            var createTestForm = new PassTest(currentUser, testId);
 
             // Закрываем текущую главную форму
             currentForm.Hide();

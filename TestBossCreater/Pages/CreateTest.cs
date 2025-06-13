@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore;
 using TestBossCreater.Models;
 using TestBossCreater.Models.Consts;
+using TestBossCreater.Pages.DialogePage;
 using TestBossCreater.Service.Navigation;
 using TestBossCreater.Service.Soundpad;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
@@ -21,8 +22,7 @@ namespace TestBossCreater.Pages
     public partial class CreateTest : Form
     {
         private readonly AppDbContext _context;
-        private string TypeOfQuestion => comboBox1?.SelectedItem.ToString();
-
+        private string TypeOfQuestion => comboBox1?.SelectedItem?.ToString();
 
         public SoundpadClass soundpad = new SoundpadClass();
 
@@ -32,17 +32,10 @@ namespace TestBossCreater.Pages
         private bool IsCurrentQuestionExistsInTest => CurPage < CreatableQuestions.Count &&
                 CreatableQuestions[CurPage]?.QuestionText != string.Empty;
 
-        /// <summary>
-        /// Проверка на то, существуют ли следующий вопрос в листе вопросов
-        /// </summary>
-        private bool IsNextQuestionExistsInTest => CurPage < CreatableQuestions.Count &&
-        CreatableQuestions[CurPage + 1]?.QuestionText != string.Empty;
-
-
         public string _currentUser;
         public int ErrorCount = 0;
         public int CurPage = 0;
-        public Test CreatableTest = new Test() { Title = "На дебила" };
+        public Test CreatableTest = new Test();
         public List<BaseQuestion> CreatableQuestions = new List<BaseQuestion>();
 
         public string SelectedMultipleOption
@@ -118,7 +111,7 @@ namespace TestBossCreater.Pages
             {
                 ShowPageForProperty(CreatableQuestions[CurPage]);
             }
-            
+
         }
 
         /// <summary>
@@ -215,7 +208,8 @@ namespace TestBossCreater.Pages
                     CreatableQuestions.Add(createdRangeQuestion);
                     break;
                 case TypeQuestions.TermChoise:
-                    var createdTermQuestion = new TermQuestion() {
+                    var createdTermQuestion = new TermQuestion()
+                    {
                         CorrectTerm = TermTextBoxUserAnswer.Text,
                         QuestionText = questionDescription.Text,
                     };
@@ -272,6 +266,10 @@ namespace TestBossCreater.Pages
         /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
+            // Если не заполнили корректно инфу про тест - не завершаем создание теста
+            if (!ShowDialogePageForTestInformation())
+                return;
+            // Если корректно не можем добавить вопрос в тест - не завершаем создание теста
             if (!CreateQuestion())
                 return;
             _context.Tests.Add(CreatableTest);
@@ -490,6 +488,40 @@ namespace TestBossCreater.Pages
         /// <param name="e"></param>
         private void button6_Click(object sender, EventArgs e)
         {
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Navigation.ShowMainMenu(this); // передаётся экземляр текущего класса  CreateTest : Form
+        }
+
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        public bool ShowDialogePageForTestInformation()
+        {
+            // Создаём диалоговое окно
+            DialogePageForCreateTest dialogPage = new DialogePageForCreateTest();
+
+            // Если окно закрывается с результатом "ОК"
+            if (dialogPage.ShowDialog() == DialogResult.OK)
+            {
+                // Получаем параметры из диалогового окна
+                CreatableTest.Title = dialogPage.Title;
+                CreatableTest.Description = dialogPage.Description;
+                CreatableTest.NeededTrueAnswers = dialogPage.NeededTrueAnswers;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
             if (CreatableQuestions.Count >= 1)
             {
                 var deletedQuestion = CreatableQuestions[CurPage];
@@ -507,13 +539,7 @@ namespace TestBossCreater.Pages
                 {
                     ClearPageForNewQuestion();
                 }
-
             }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            Navigation.ShowMainMenu(this); // передаётся экземляр текущего класса  CreateTest : Form
         }
     }
 }

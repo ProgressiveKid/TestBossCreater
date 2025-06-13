@@ -1,4 +1,6 @@
 using System.Windows.Forms;
+using Microsoft.EntityFrameworkCore;
+using TestBossCreater.Models;
 using TestBossCreater.Pages;
 using TestBossCreater.Service.Navigation;
 
@@ -29,15 +31,16 @@ namespace TestBossCreater
         /// </summary>
         private void LoadTests()
         {
-            var products = _context.Tests.ToList();
-            if (products.Count == 0)
+            var allTests = _context.Tests
+                .Include(t => t.Questions).ToList();
+            if (allTests.Count == 0)
             {
                 pictureBoxDataGrid.BringToFront();
                 pictureBoxDataGrid.Visible = true;
             }
             else
             {
-                dataGridView1.DataSource = products;
+                dataGridView1.DataSource = allTests;
             }
         }
 
@@ -49,12 +52,33 @@ namespace TestBossCreater
         /// <exception cref="NotImplementedException"></exception>
         private void button1_Click(object sender, EventArgs e)
         {
+            int testId = 0;
             CurrentUser = textBox1.Text;
-            Navigation.ShowCreatePage(this, CurrentUser);
+            if (dataGridView1.SelectedRows.Count > 0) // Проверяем, что есть выделенные строки
+            {
+                var firstSelectedRow = dataGridView1.SelectedRows[0]; // Берём первую выделенную строку
+                testId = Convert.ToInt32(firstSelectedRow.Cells[0].Value); // Значение первой ячейки в этой строке
+            }
+            else if (dataGridView1.SelectedCells.Count == 1)
+            {
+                string cellValue = dataGridView1.SelectedCells[0].Value?.ToString();
+
+                if (!int.TryParse(cellValue, out testId))
+                {
+                    testId = 0;
+                }
+            }
+            var test = _context.Tests.FirstOrDefault(x => x.Id == testId);
+            if (test == null)
+            {
+                MessageBox.Show("Нормально строку выдели, Тест с таким ID не найден");
+                return;
+            }
+            Navigation.ShowPassTestPage(this, CurrentUser, testId);
         }
 
         /// <summary>
-        /// Пройти выбранный тест
+        /// Создать новый тест
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -62,7 +86,7 @@ namespace TestBossCreater
         private void button2_Click(object sender, EventArgs e)
         {
             CurrentUser = textBox1.Text;
-            throw new NotImplementedException();
+            Navigation.ShowCreatePage(this, CurrentUser);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

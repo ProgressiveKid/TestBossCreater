@@ -12,7 +12,7 @@ namespace TestBossCreater.Pages
 {
     public partial class PassTest : Form
     {
-        public PassTest(int passedTest)
+        public PassTest(string currentUser, int passedTest)
         {
             InitializeComponent();
         }
