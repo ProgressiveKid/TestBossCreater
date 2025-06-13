@@ -21,10 +21,8 @@ namespace TestBossCreater.Service.Navigation
             currentForm.Hide();
 
             // Показываем CreateTest как модальное окно
-            createTestForm.ShowDialog();
+            createTestForm.Show();
 
-            // После закрытия CreateTest возвращаем главную форму
-            currentForm.Show();
         }
 
         public static void ShowMainMenu(Form currentForm)
@@ -36,10 +34,8 @@ namespace TestBossCreater.Service.Navigation
             currentForm.Close();
 
             // Показываем CreateTest как модальное окно
-            createTestForm.ShowDialog();
+            createTestForm.Show();
 
-            // После закрытия CreateTest возвращаем главную форму
-            currentForm.Show();
         }
 
         public static void ShowPassTestPage(Form currentForm, int testId)
@@ -48,13 +44,10 @@ namespace TestBossCreater.Service.Navigation
             var createTestForm = new PassTest(testId);
 
             // Закрываем текущую главную форму
-            currentForm.Close();
+            currentForm.Hide();
 
             // Показываем CreateTest как модальное окно
-            createTestForm.ShowDialog();
-
-            // После закрытия CreateTest возвращаем главную форму
-            currentForm.Show();
+            createTestForm.Show();
         }
     }
 }

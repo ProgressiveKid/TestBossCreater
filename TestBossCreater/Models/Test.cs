@@ -24,6 +24,9 @@ namespace TestBossCreater.Models
         public string? Description { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;   
         public string Creater { get; set; } = string.Empty;
+
+        public int neededTrueAnswers { get; set; }
+        public int countquestion => Questions.Count;
         public ICollection<BaseQuestion> Questions { get; set; } = new List<BaseQuestion>();
     }
 }

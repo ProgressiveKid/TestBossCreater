@@ -5,7 +5,7 @@ namespace TestBossCreater.Models
     public class TermQuestion : BaseQuestion
     {
         public string CorrectTerm { get; set; } = null!;
-        public override string Type => TypeQuestions.SingleChoise;
+        public override string Type => TypeQuestions.TermChoise;
 
         public override bool CheckAnswer()
         {

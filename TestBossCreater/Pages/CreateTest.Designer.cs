@@ -60,19 +60,24 @@
             RangeSecondRichTextBox = new RichTextBox();
             RangeFirstRichTextBox = new RichTextBox();
             tabPage3 = new TabPage();
+            label10 = new Label();
+            TermTextBoxUserAnswer = new TextBox();
             authorLabel = new Label();
+            button6 = new Button();
+            button5 = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
+            tabPage3.SuspendLayout();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(734, 472);
+            button1.Location = new Point(734, 453);
             button1.Name = "button1";
-            button1.Size = new Size(54, 70);
+            button1.Size = new Size(73, 55);
             button1.TabIndex = 0;
             button1.Text = "Следующий";
             button1.UseVisualStyleBackColor = true;
@@ -80,9 +85,9 @@
             // 
             // button2
             // 
-            button2.Location = new Point(12, 465);
+            button2.Location = new Point(12, 446);
             button2.Name = "button2";
-            button2.Size = new Size(68, 85);
+            button2.Size = new Size(68, 62);
             button2.TabIndex = 1;
             button2.Text = "Предыдущ";
             button2.UseVisualStyleBackColor = true;
@@ -102,7 +107,7 @@
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(20, 6);
+            panel1.Location = new Point(17, 6);
             panel1.Name = "panel1";
             panel1.Size = new Size(611, 193);
             panel1.TabIndex = 2;
@@ -221,7 +226,7 @@
             // 
             // questionDescription
             // 
-            questionDescription.Location = new Point(122, 353);
+            questionDescription.Location = new Point(162, 292);
             questionDescription.Name = "questionDescription";
             questionDescription.Size = new Size(495, 87);
             questionDescription.TabIndex = 8;
@@ -230,25 +235,25 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(22, 353);
+            label5.Location = new Point(12, 295);
             label5.Name = "label5";
-            label5.Size = new Size(79, 20);
+            label5.Size = new Size(142, 20);
             label5.TabIndex = 8;
-            label5.Text = "Описание";
+            label5.Text = "Описание вопроса";
             // 
             // pictureBox1
             // 
             pictureBox1.Location = new Point(162, 27);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(495, 306);
+            pictureBox1.Size = new Size(495, 239);
             pictureBox1.TabIndex = 9;
             pictureBox1.TabStop = false;
             // 
             // button3
             // 
-            button3.Location = new Point(734, 573);
+            button3.Location = new Point(691, 27);
             button3.Name = "button3";
-            button3.Size = new Size(54, 70);
+            button3.Size = new Size(97, 70);
             button3.TabIndex = 10;
             button3.Text = "Закончить";
             button3.UseVisualStyleBackColor = true;
@@ -256,17 +261,18 @@
             // 
             // button4
             // 
-            button4.Location = new Point(12, 566);
+            button4.Location = new Point(691, 121);
             button4.Name = "button4";
-            button4.Size = new Size(68, 85);
+            button4.Size = new Size(97, 85);
             button4.TabIndex = 11;
             button4.Text = "Выйти";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(637, 385);
+            comboBox1.Location = new Point(348, 397);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(151, 28);
             comboBox1.TabIndex = 12;
@@ -275,7 +281,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(663, 356);
+            label6.Location = new Point(229, 400);
             label6.Name = "label6";
             label6.Size = new Size(98, 20);
             label6.TabIndex = 13;
@@ -335,11 +341,12 @@
             RangeDeviationRichTextBox.Size = new Size(184, 39);
             RangeDeviationRichTextBox.TabIndex = 4;
             RangeDeviationRichTextBox.Text = "";
+            RangeDeviationRichTextBox.KeyPress += RangeDeviationRichTextBox_KeyPress;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(16, 110);
+            label8.Location = new Point(20, 87);
             label8.Name = "label8";
             label8.Size = new Size(56, 20);
             label8.TabIndex = 3;
@@ -349,7 +356,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(319, 110);
+            label7.Location = new Point(311, 87);
             label7.Name = "label7";
             label7.Size = new Size(20, 20);
             label7.TabIndex = 2;
@@ -357,7 +364,7 @@
             // 
             // RangeSecondRichTextBox
             // 
-            RangeSecondRichTextBox.Location = new Point(402, 91);
+            RangeSecondRichTextBox.Location = new Point(401, 68);
             RangeSecondRichTextBox.Name = "RangeSecondRichTextBox";
             RangeSecondRichTextBox.Size = new Size(184, 39);
             RangeSecondRichTextBox.TabIndex = 1;
@@ -366,7 +373,7 @@
             // 
             // RangeFirstRichTextBox
             // 
-            RangeFirstRichTextBox.Location = new Point(78, 91);
+            RangeFirstRichTextBox.Location = new Point(82, 68);
             RangeFirstRichTextBox.Name = "RangeFirstRichTextBox";
             RangeFirstRichTextBox.Size = new Size(184, 39);
             RangeFirstRichTextBox.TabIndex = 0;
@@ -375,6 +382,8 @@
             // 
             // tabPage3
             // 
+            tabPage3.Controls.Add(label10);
+            tabPage3.Controls.Add(TermTextBoxUserAnswer);
             tabPage3.Location = new Point(4, 29);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
@@ -382,6 +391,22 @@
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Конкретный ответ";
             tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(29, 89);
+            label10.Name = "label10";
+            label10.Size = new Size(148, 20);
+            label10.TabIndex = 1;
+            label10.Text = "Ответ пользователя";
+            // 
+            // TermTextBoxUserAnswer
+            // 
+            TermTextBoxUserAnswer.Location = new Point(241, 82);
+            TermTextBoxUserAnswer.Name = "TermTextBoxUserAnswer";
+            TermTextBoxUserAnswer.Size = new Size(227, 27);
+            TermTextBoxUserAnswer.TabIndex = 0;
             // 
             // authorLabel
             // 
@@ -392,11 +417,32 @@
             authorLabel.TabIndex = 15;
             authorLabel.Text = "Test MadeBy";
             // 
+            // button6
+            // 
+            button6.Location = new Point(7, 623);
+            button6.Name = "button6";
+            button6.Size = new Size(73, 41);
+            button6.TabIndex = 17;
+            button6.Text = "Удалить вопрос";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
+            // 
+            // button5
+            // 
+            button5.Location = new Point(691, 232);
+            button5.Name = "button5";
+            button5.Size = new Size(94, 57);
+            button5.TabIndex = 18;
+            button5.Text = "Описание теста";
+            button5.UseVisualStyleBackColor = true;
+            // 
             // CreateTest
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 678);
+            ClientSize = new Size(819, 678);
+            Controls.Add(button5);
+            Controls.Add(button6);
             Controls.Add(authorLabel);
             Controls.Add(tabControl1);
             Controls.Add(label6);
@@ -418,6 +464,8 @@
             tabPage1.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
+            tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -457,5 +505,9 @@
         private Label label9;
         private RichTextBox RangeDeviationRichTextBox;
         private Label authorLabel;
+        private Button button6;
+        private Label label10;
+        private TextBox TermTextBoxUserAnswer;
+        private Button button5;
     }
 }
