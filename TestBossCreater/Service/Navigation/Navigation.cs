@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestBossCreater.Models;
 using TestBossCreater.Pages;
+using TestBossCreater.Pages.DialogePage;
 
 namespace TestBossCreater.Service.Navigation
 {
@@ -38,10 +40,10 @@ namespace TestBossCreater.Service.Navigation
 
         }
 
-        public static void ShowPassTestPage(Form currentForm, string currentUser, int testId)
+        public static void ShowPassTestPage(Form currentForm, string currentUser, Test test)
         {
             // Создаём экземпляр формы CreateTest
-            var createTestForm = new PassTest(currentUser, testId);
+            var createTestForm = new PassTest(currentUser, test);
 
             // Закрываем текущую главную форму
             currentForm.Hide();

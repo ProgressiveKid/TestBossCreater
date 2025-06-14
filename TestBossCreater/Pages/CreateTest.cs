@@ -115,12 +115,12 @@ namespace TestBossCreater.Pages
         }
 
         /// <summary>
-        /// Заполнить страницу информацией по вопросу
+        /// Заполнить страницу информацией по текущему вопросу
         /// </summary>
         /// <param name="question"></param>
         private void ShowPageForProperty(BaseQuestion question)
         {
-            comboBox1.SelectedItem = CreatableQuestions[CurPage].Type;
+            comboBox1.SelectedItem = question.Type;
             switch (question)
             {
                 case MultipleQuestion multipleQuestion:
@@ -228,10 +228,10 @@ namespace TestBossCreater.Pages
         /// <param name="question"></param>
         private BaseQuestion UpdateQuestion(BaseQuestion question)
         {
-            //if (!ValidateQuestionInputs())
+            //if (!ValidateQuestionInputs(TypeOfQuestion))
             //{
             //    CheckDumpUser();
-            //    return false;
+            //    return question;
             //}
             switch (question)
             {
@@ -282,9 +282,6 @@ namespace TestBossCreater.Pages
             _context.SaveChanges();
             Navigation.ShowMainMenu(this); // передаётся экземляр текущего класса  CreateTest : Form
         }
-
-
-
 
         private void CreateTest_Load(object sender, EventArgs e)
         {

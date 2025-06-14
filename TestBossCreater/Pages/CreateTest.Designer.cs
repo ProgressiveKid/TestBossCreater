@@ -243,7 +243,6 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.ahillesMain;
             pictureBox1.Location = new Point(162, 27);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(495, 239);
@@ -466,7 +465,6 @@
         }
 
         #endregion
-
         private Button button1;
         private Button button2;
         private Panel panel1;

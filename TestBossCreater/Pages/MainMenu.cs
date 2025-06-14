@@ -74,7 +74,7 @@ namespace TestBossCreater
                 MessageBox.Show("Нормально строку выдели, Тест с таким ID не найден");
                 return;
             }
-            Navigation.ShowPassTestPage(this, CurrentUser, testId);
+            Navigation.ShowPassTestPage(this, CurrentUser, test);
         }
 
         /// <summary>
