@@ -448,7 +448,7 @@
             Controls.Add(button2);
             Controls.Add(button1);
             Name = "CreateTest";
-            Text = "CreateTest";
+            Text = "Создание нового теста";
             Load += CreateTest_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

@@ -46,5 +46,19 @@ namespace TestBossCreater.Pages.DialogePage
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Разрешить цифры и управляющие символы (Backspace, Delete и т.п.)
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Отменить ввод
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

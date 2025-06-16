@@ -40,6 +40,10 @@ namespace TestBossCreater
             textBox1 = new TextBox();
             menuStrip1 = new MenuStrip();
             статистикаToolStripMenuItem = new ToolStripMenuItem();
+            пользователяToolStripMenuItem = new ToolStripMenuItem();
+            тестаToolStripMenuItem = new ToolStripMenuItem();
+            выбранныйТестToolStripMenuItem = new ToolStripMenuItem();
+            всеТестыToolStripMenuItem = new ToolStripMenuItem();
             справкаToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxDataGrid).BeginInit();
@@ -71,11 +75,11 @@ namespace TestBossCreater
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(35, 35);
+            dataGridView1.Location = new Point(30, 35);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.RowTemplate.Height = 29;
-            dataGridView1.Size = new Size(679, 400);
+            dataGridView1.Size = new Size(691, 400);
             dataGridView1.TabIndex = 2;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -136,10 +140,40 @@ namespace TestBossCreater
             // 
             // статистикаToolStripMenuItem
             // 
+            статистикаToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { пользователяToolStripMenuItem, тестаToolStripMenuItem });
             статистикаToolStripMenuItem.ForeColor = SystemColors.ControlLight;
             статистикаToolStripMenuItem.Name = "статистикаToolStripMenuItem";
             статистикаToolStripMenuItem.Size = new Size(98, 24);
             статистикаToolStripMenuItem.Text = "Статистика";
+            // 
+            // пользователяToolStripMenuItem
+            // 
+            пользователяToolStripMenuItem.Name = "пользователяToolStripMenuItem";
+            пользователяToolStripMenuItem.Size = new Size(190, 26);
+            пользователяToolStripMenuItem.Text = "Пользователя";
+            пользователяToolStripMenuItem.Click += пользователяToolStripMenuItem_Click;
+            // 
+            // тестаToolStripMenuItem
+            // 
+            тестаToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { выбранныйТестToolStripMenuItem, всеТестыToolStripMenuItem });
+            тестаToolStripMenuItem.Name = "тестаToolStripMenuItem";
+            тестаToolStripMenuItem.Size = new Size(190, 26);
+            тестаToolStripMenuItem.Text = "Теста";
+            тестаToolStripMenuItem.Click += тестаToolStripMenuItem_Click;
+            // 
+            // выбранныйТестToolStripMenuItem
+            // 
+            выбранныйТестToolStripMenuItem.Name = "выбранныйТестToolStripMenuItem";
+            выбранныйТестToolStripMenuItem.Size = new Size(207, 26);
+            выбранныйТестToolStripMenuItem.Text = "Выбранный тест";
+            выбранныйТестToolStripMenuItem.Click += выбранныйТестToolStripMenuItem_Click;
+            // 
+            // всеТестыToolStripMenuItem
+            // 
+            всеТестыToolStripMenuItem.Name = "всеТестыToolStripMenuItem";
+            всеТестыToolStripMenuItem.Size = new Size(207, 26);
+            всеТестыToolStripMenuItem.Text = "Все тесты";
+            всеТестыToolStripMenuItem.Click += всеТестыToolStripMenuItem_Click;
             // 
             // справкаToolStripMenuItem
             // 
@@ -161,8 +195,10 @@ namespace TestBossCreater
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "MainMenu";
-            Text = "BossTestCreater";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Главное меню";
             Load += MainMenu_Load_1;
+            Shown += MainMenu_Shown;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxDataGrid).EndInit();
             groupBox1.ResumeLayout(false);
@@ -187,5 +223,9 @@ namespace TestBossCreater
         private MenuStrip menuStrip1;
         private ToolStripMenuItem статистикаToolStripMenuItem;
         private ToolStripMenuItem справкаToolStripMenuItem;
+        private ToolStripMenuItem пользователяToolStripMenuItem;
+        private ToolStripMenuItem тестаToolStripMenuItem;
+        private ToolStripMenuItem выбранныйТестToolStripMenuItem;
+        private ToolStripMenuItem всеТестыToolStripMenuItem;
     }
 }

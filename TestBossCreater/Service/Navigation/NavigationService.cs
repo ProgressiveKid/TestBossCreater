@@ -6,49 +6,52 @@ using System.Threading.Tasks;
 using TestBossCreater.Models;
 using TestBossCreater.Pages;
 using TestBossCreater.Pages.DialogePage;
-
+using static System.Net.Mime.MediaTypeNames;
 namespace TestBossCreater.Service.Navigation
 {
     /// <summary>
     /// Вспомогательный класс навигации между страницами
     /// </summary>
-    public static class Navigation
+    public static class NavigationService
     {
+        /// <summary>
+        ///  Это свойство тут нужно чтобы не создавать лишние экземпляра главной формы
+        /// </summary>
+        public static Form MainMenu { get; set;  }
         public static void ShowCreatePage(Form currentForm, string currentUser)
         {
             // Создаём экземпляр формы CreateTest
             var createTestForm = new CreateTest(currentUser);
-
             // Скрываем текущую главную форму (нельзя закрывать, потому что потушиться приложение)
-            currentForm.Hide();
-
-            // Показываем CreateTest как модальное окно
+            MainMenu = currentForm;
+            MainMenu.Hide();
+            createTestForm.StartPosition = FormStartPosition.CenterScreen;
             createTestForm.Show();
-
         }
-
         public static void ShowMainMenu(Form currentForm)
         {
-            // Создаём экземпляр формы CreateTest
-            var createTestForm = new MainMenu();
-
-            // Закрываем текущую главную форму
             currentForm.Close();
-
-            // Показываем CreateTest как модальное окно
-            createTestForm.Show();
-
+            currentForm.Dispose();
+            MainMenu = new MainMenu();
+            MainMenu.StartPosition = FormStartPosition.CenterScreen;
+            MainMenu.Show();
         }
-
         public static void ShowPassTestPage(Form currentForm, string currentUser, Test test)
         {
             // Создаём экземпляр формы CreateTest
             var createTestForm = new PassTest(currentUser, test);
-
-            // Закрываем текущую главную форму
-            currentForm.Hide();
-
-            // Показываем CreateTest как модальное окно
+            MainMenu = currentForm;
+            MainMenu.Hide();
+            createTestForm.StartPosition = FormStartPosition.CenterScreen;
+            createTestForm.Show();
+        }
+        public static void ShowStatistcPage(Form currentForm, List<TestStatistic> testStatistics)
+        {
+            // Создаём экземпляр формы CreateTest
+            var createTestForm = new DialogePageForStatistic(testStatistics);
+            MainMenu = currentForm;
+            MainMenu.Hide();
+            createTestForm.StartPosition = FormStartPosition.CenterScreen;
             createTestForm.Show();
         }
     }

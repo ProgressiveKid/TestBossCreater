@@ -144,6 +144,7 @@ namespace TestBossCreater.Pages
                     RangeSecondRichTextBox.Text = rangeQuestion.MaxValue.ToString();
                     break;
                 case TermQuestion termQuestion:
+                    questionDescription.Text = termQuestion.QuestionText;
                     TermTextBoxUserAnswer.Text = termQuestion.CorrectTerm;
                     break;
             }
@@ -269,9 +270,7 @@ namespace TestBossCreater.Pages
             // Если не заполнили корректно инфу про тест - не завершаем создание теста
             if (!ShowDialogePageForTestInformation())
                 return;
-            // Если корректно не можем добавить вопрос в тест - не завершаем создание теста
-            if (!CreateQuestion())
-                return;
+
             _context.Tests.Add(CreatableTest);
             _context.SaveChanges();
 
@@ -280,7 +279,7 @@ namespace TestBossCreater.Pages
             CreatableQuestions.ForEach(x => x.TestId = testId);
             _context.AddRange(CreatableQuestions);
             _context.SaveChanges();
-            Navigation.ShowMainMenu(this); // передаётся экземляр текущего класса  CreateTest : Form
+            NavigationService.ShowMainMenu(this); // передаётся экземляр текущего класса  CreateTest : Form
         }
 
         private void CreateTest_Load(object sender, EventArgs e)
@@ -478,18 +477,10 @@ namespace TestBossCreater.Pages
 
         }
 
-        /// <summary>
-        /// Удалить вопрос
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button6_Click(object sender, EventArgs e)
-        {
-        }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Navigation.ShowMainMenu(this); // передаётся экземляр текущего класса  CreateTest : Form
+            NavigationService.ShowMainMenu(this); // передаётся экземляр текущего класса  CreateTest : Form
         }
 
         private void button5_Click_1(object sender, EventArgs e)
@@ -509,6 +500,11 @@ namespace TestBossCreater.Pages
                 CreatableTest.Title = dialogPage.Title;
                 CreatableTest.Description = dialogPage.Description;
                 CreatableTest.NeededTrueAnswers = dialogPage.NeededTrueAnswers;
+                if (CreatableTest.NeededTrueAnswers > CreatableQuestions.Count)
+                {
+                    MessageBox.Show("Кол-во правильных для сдачи теста вопроса не может превышать кол-во вопросов в самом тесте");
+                    return false;
+                }
                 return true;
             }
             else
@@ -517,6 +513,11 @@ namespace TestBossCreater.Pages
             }
         }
 
+        /// <summary>
+        /// Удалить вопрос
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             if (CreatableQuestions.Count >= 1)

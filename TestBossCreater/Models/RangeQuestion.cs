@@ -10,7 +10,6 @@ namespace TestBossCreater.Models
     {
         public double MinValue { get; set; }
         public double MaxValue { get; set; }
-        public double CorrectRange { get; set; }
 
         /// <summary>
         /// Отклонение от диапазона правильного ответа
@@ -21,8 +20,8 @@ namespace TestBossCreater.Models
         public override bool CheckAnswer()
         {
             int intIserAnswer = Convert.ToInt32(UserOption);
-            return MinValue + BaseDeviation <= intIserAnswer &&
-                MaxValue - BaseDeviation <= intIserAnswer;
+            return MinValue - BaseDeviation <= intIserAnswer &&
+                MaxValue + BaseDeviation >= intIserAnswer;
         }
     }
 }

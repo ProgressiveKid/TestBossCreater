@@ -286,6 +286,7 @@
             RangeAnswerRichTextBox.Size = new Size(184, 39);
             RangeAnswerRichTextBox.TabIndex = 0;
             RangeAnswerRichTextBox.Text = "";
+            RangeAnswerRichTextBox.KeyPress += RangeAnswerRichTextBox_KeyPress;
             // 
             // tabPage3
             // 
@@ -326,6 +327,8 @@
             // 
             // comboBox1
             // 
+            comboBox1.DropDownStyle = ComboBoxStyle.Simple;
+            comboBox1.Enabled = false;
             comboBox1.FormattingEnabled = true;
             comboBox1.Location = new Point(379, 269);
             comboBox1.Name = "comboBox1";
@@ -341,6 +344,7 @@
             exitButton.TabIndex = 22;
             exitButton.Text = "Выйти";
             exitButton.UseVisualStyleBackColor = true;
+            exitButton.Click += exitButton_Click;
             // 
             // endTestsButton
             // 
@@ -350,6 +354,7 @@
             endTestsButton.TabIndex = 21;
             endTestsButton.Text = "Завершить тест";
             endTestsButton.UseVisualStyleBackColor = true;
+            endTestsButton.Click += endTestsButton_Click;
             // 
             // pictureBox1
             // 
@@ -396,6 +401,7 @@
             nexQuestionButton.TabIndex = 16;
             nexQuestionButton.Text = "Следующий";
             nexQuestionButton.UseVisualStyleBackColor = true;
+            nexQuestionButton.Click += nexQuestionButton_Click;
             // 
             // CountQuestionsLabel
             // 
@@ -444,7 +450,7 @@
             Controls.Add(previusQuestionButton);
             Controls.Add(nexQuestionButton);
             Name = "PassTest";
-            Text = "PassTest";
+            Text = "Прохождение теста";
             Load += PassTest_Load_1;
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
