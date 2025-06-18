@@ -29,27 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DialogePageAboutAuthor));
-            pictureBox1 = new PictureBox();
-            richTextBox1 = new RichTextBox();
             button1 = new Button();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            pictureBox2 = new PictureBox();
+            panel1 = new Panel();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Location = new Point(47, 28);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(326, 344);
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            // 
-            // richTextBox1
-            // 
-            richTextBox1.Location = new Point(408, 39);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(363, 333);
-            richTextBox1.TabIndex = 1;
-            richTextBox1.Text = "";
             // 
             // button1
             // 
@@ -61,25 +45,43 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(-22, 2);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(848, 454);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 3;
+            pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
+            // 
+            // panel1
+            // 
+            panel1.Location = new Point(347, 35);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(441, 307);
+            panel1.TabIndex = 4;
+            // 
             // DialogePageAboutAuthor
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(panel1);
             Controls.Add(button1);
-            Controls.Add(richTextBox1);
-            Controls.Add(pictureBox1);
+            Controls.Add(pictureBox2);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "DialogePageAboutAuthor";
-            Text = "DialogePageAboutAuthor";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            Text = "Об Авторе";
+            Load += DialogePageAboutAuthor_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private PictureBox pictureBox1;
-        private RichTextBox richTextBox1;
         private Button button1;
+        private PictureBox pictureBox2;
+        private Panel panel1;
     }
 }

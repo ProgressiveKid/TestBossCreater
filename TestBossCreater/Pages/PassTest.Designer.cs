@@ -443,6 +443,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ButtonHighlight;
             ClientSize = new Size(837, 655);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox4);

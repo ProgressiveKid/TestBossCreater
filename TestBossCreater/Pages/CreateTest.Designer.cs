@@ -244,22 +244,26 @@
             // 
             // button3
             // 
+            button3.BackColor = SystemColors.GradientActiveCaption;
+            button3.ForeColor = SystemColors.Desktop;
             button3.Location = new Point(691, 27);
             button3.Name = "button3";
             button3.Size = new Size(97, 70);
             button3.TabIndex = 10;
             button3.Text = "Завершить тест";
-            button3.UseVisualStyleBackColor = true;
+            button3.UseVisualStyleBackColor = false;
             button3.Click += button3_Click;
             // 
             // button4
             // 
+            button4.BackColor = SystemColors.GradientActiveCaption;
+            button4.ForeColor = SystemColors.Desktop;
             button4.Location = new Point(691, 121);
             button4.Name = "button4";
             button4.Size = new Size(97, 85);
             button4.TabIndex = 11;
             button4.Text = "Выйти";
-            button4.UseVisualStyleBackColor = true;
+            button4.UseVisualStyleBackColor = false;
             button4.Click += button4_Click;
             // 
             // comboBox1
@@ -475,6 +479,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ButtonHighlight;
             ClientSize = new Size(819, 678);
             Controls.Add(pictureBox5);
             Controls.Add(pictureBox4);

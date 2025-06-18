@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TestBossCreater.Models;
 using TestBossCreater.Models.Consts;
 using TestBossCreater.Pages;
+using TestBossCreater.Pages.DialogePage;
 using TestBossCreater.Service.Navigation;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 namespace TestBossCreater
@@ -238,6 +239,8 @@ namespace TestBossCreater
         }
         private void îáÀâòîğåToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DialogePageAboutAuthor dialogePageAboutAuthor = new DialogePageAboutAuthor();
+            dialogePageAboutAuthor.ShowDialog();
         }
         private void ğåäàêòèğîâàíèåToolStripMenuItem_Click(object sender, EventArgs e)
         {

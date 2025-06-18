@@ -121,7 +121,7 @@ namespace TestBossCreater
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.ahillesMain1;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(44, 34);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(184, 171);
