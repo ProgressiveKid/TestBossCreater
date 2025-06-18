@@ -21,6 +21,17 @@ namespace TestBossCreater.Pages.DialogePage
             InitializeComponent();
         }
 
+        public DialogePageForCreateTest(string title, string description, int neededTrueAnswers)
+        {
+            InitializeComponent();
+            Title = title;
+            Description = description;
+            NeededTrueAnswers = neededTrueAnswers;
+            richTextBox1.Text = title;
+            richTextBox2.Text = description;
+            textBox1.Text = neededTrueAnswers.ToString();
+        }
+
         private void label1_Click(object sender, EventArgs e)
         {
 

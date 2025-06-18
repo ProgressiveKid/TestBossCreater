@@ -68,6 +68,8 @@
             pictureBox4 = new PictureBox();
             toolTip1 = new ToolTip(components);
             pictureBox5 = new PictureBox();
+            sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
+            toolTip2 = new ToolTip(components);
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabControl1.SuspendLayout();
@@ -218,6 +220,7 @@
             questionDescription.Size = new Size(495, 87);
             questionDescription.TabIndex = 8;
             questionDescription.Text = "";
+            toolTip1.SetToolTip(questionDescription, "Текстовое описание вопроса");
             // 
             // label5
             // 
@@ -261,11 +264,14 @@
             // 
             // comboBox1
             // 
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.FormattingEnabled = true;
             comboBox1.Location = new Point(364, 284);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(151, 28);
             comboBox1.TabIndex = 12;
+            toolTip1.SetToolTip(comboBox1, "Один из возможных типов вопросов");
+            comboBox1.DrawItem += comboBox1_DrawItem;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // label6
@@ -282,10 +288,10 @@
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
-            tabControl1.Location = new Point(86, 446);
+            tabControl1.Location = new Point(90, 429);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(642, 360);
+            tabControl1.Size = new Size(642, 328);
             tabControl1.TabIndex = 14;
             // 
             // tabPage1
@@ -294,7 +300,7 @@
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(634, 327);
+            tabPage1.Size = new Size(634, 295);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Тестовый вопрос";
             tabPage1.UseVisualStyleBackColor = true;
@@ -310,7 +316,7 @@
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(634, 327);
+            tabPage2.Size = new Size(634, 295);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Вопрос с диапазоном";
             tabPage2.UseVisualStyleBackColor = true;
@@ -377,7 +383,7 @@
             tabPage3.Location = new Point(4, 29);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(634, 327);
+            tabPage3.Size = new Size(634, 295);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Конкретный ответ";
             tabPage3.UseVisualStyleBackColor = true;
@@ -417,6 +423,7 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 18;
             pictureBox2.TabStop = false;
+            toolTip1.SetToolTip(pictureBox2, "Удалить текущий вопрос");
             pictureBox2.Click += pictureBox2_Click;
             // 
             // pictureBox3
@@ -443,15 +450,26 @@
             pictureBox4.TabStop = false;
             pictureBox4.Click += pictureBox4_Click;
             // 
+            // toolTip1
+            // 
+            toolTip1.Popup += toolTip1_Popup;
+            // 
             // pictureBox5
             // 
             pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(64, 194);
+            pictureBox5.Location = new Point(75, 194);
             pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(92, 72);
+            pictureBox5.Size = new Size(74, 72);
             pictureBox5.TabIndex = 21;
             pictureBox5.TabStop = false;
             pictureBox5.Click += pictureBox5_Click;
+            // 
+            // sqlCommand1
+            // 
+            sqlCommand1.CommandTimeout = 30;
+            sqlCommand1.Connection = null;
+            sqlCommand1.Notification = null;
+            sqlCommand1.Transaction = null;
             // 
             // CreateTest
             // 
@@ -531,5 +549,7 @@
         private PictureBox pictureBox4;
         private ToolTip toolTip1;
         private PictureBox pictureBox5;
+        private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
+        private ToolTip toolTip2;
     }
 }

@@ -60,17 +60,19 @@
             pictureBox1 = new PictureBox();
             label5 = new Label();
             questionDescription = new RichTextBox();
-            previusQuestionButton = new Button();
-            nexQuestionButton = new Button();
             CountQuestionsLabel = new Label();
             CountTrueAnswersLabel = new Label();
             LeftQuestionLabel = new Label();
+            pictureBox4 = new PictureBox();
+            pictureBox3 = new PictureBox();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             panel1.SuspendLayout();
             tabPage2.SuspendLayout();
             tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // authorLabel
@@ -335,6 +337,7 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(151, 28);
             comboBox1.TabIndex = 23;
+            comboBox1.DrawItem += comboBox1_DrawItem;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // exitButton
@@ -385,26 +388,6 @@
             questionDescription.TabIndex = 19;
             questionDescription.Text = "";
             // 
-            // previusQuestionButton
-            // 
-            previusQuestionButton.Location = new Point(27, 431);
-            previusQuestionButton.Name = "previusQuestionButton";
-            previusQuestionButton.Size = new Size(68, 62);
-            previusQuestionButton.TabIndex = 17;
-            previusQuestionButton.Text = "Предыдущ";
-            previusQuestionButton.UseVisualStyleBackColor = true;
-            previusQuestionButton.Click += previusQuestionButton_Click;
-            // 
-            // nexQuestionButton
-            // 
-            nexQuestionButton.Location = new Point(749, 438);
-            nexQuestionButton.Name = "nexQuestionButton";
-            nexQuestionButton.Size = new Size(73, 55);
-            nexQuestionButton.TabIndex = 16;
-            nexQuestionButton.Text = "Следующий";
-            nexQuestionButton.UseVisualStyleBackColor = true;
-            nexQuestionButton.Click += nexQuestionButton_Click;
-            // 
             // CountQuestionsLabel
             // 
             CountQuestionsLabel.AutoSize = true;
@@ -432,11 +415,37 @@
             LeftQuestionLabel.TabIndex = 29;
             LeftQuestionLabel.Text = "LeftQuestionLabel";
             // 
+            // pictureBox4
+            // 
+            pictureBox4.Cursor = Cursors.Hand;
+            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
+            pictureBox4.Location = new Point(12, 455);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(84, 62);
+            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox4.TabIndex = 30;
+            pictureBox4.TabStop = false;
+            pictureBox4.Click += pictureBox4_Click;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Cursor = Cursors.Hand;
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(749, 455);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(84, 62);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 31;
+            pictureBox3.TabStop = false;
+            pictureBox3.Click += pictureBox3_Click;
+            // 
             // PassTest
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(837, 655);
+            Controls.Add(pictureBox3);
+            Controls.Add(pictureBox4);
             Controls.Add(LeftQuestionLabel);
             Controls.Add(CountTrueAnswersLabel);
             Controls.Add(CountQuestionsLabel);
@@ -449,8 +458,6 @@
             Controls.Add(pictureBox1);
             Controls.Add(label5);
             Controls.Add(questionDescription);
-            Controls.Add(previusQuestionButton);
-            Controls.Add(nexQuestionButton);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "PassTest";
             Text = "Прохождение теста";
@@ -464,6 +471,8 @@
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -501,10 +510,10 @@
         private PictureBox pictureBox1;
         private Label label5;
         private RichTextBox questionDescription;
-        private Button previusQuestionButton;
-        private Button nexQuestionButton;
         private Label CountQuestionsLabel;
         private Label CountTrueAnswersLabel;
         private Label LeftQuestionLabel;
+        private PictureBox pictureBox4;
+        private PictureBox pictureBox3;
     }
 }

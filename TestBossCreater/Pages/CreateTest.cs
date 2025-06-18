@@ -21,11 +21,13 @@ namespace TestBossCreater.Pages
 {
     public partial class CreateTest : Form
     {
+
         private readonly AppDbContext _context;
         private string TypeOfQuestion => comboBox1?.SelectedItem?.ToString();
 
         public SoundpadClass soundpad = new SoundpadClass();
 
+        private readonly InputMode _inputMode;
         /// <summary>
         /// Проверка на то, существуют ли созданный вопрос с текущим индексом в листе вопросов
         /// </summary>
@@ -65,13 +67,25 @@ namespace TestBossCreater.Pages
                 }
             }
         }
-        public CreateTest(string currentUser)
+        public CreateTest(string currentUser, InputMode inputMode, Test updatableTest = null)
         {
             _context = new AppDbContext();
             _currentUser = currentUser;
+            _inputMode = inputMode;
             CreatableTest.Creater = currentUser;
             InitializeComponent();
             HideAllTabPage();
+            comboBox1.Items.AddRange(TypeQuestions.AllTypes);
+
+            if (_inputMode == InputMode.Update &&
+                updatableTest != null)
+            {
+                CreatableTest = updatableTest;
+                CreatableQuestions = new List<BaseQuestion>(updatableTest.Questions);
+                var currentQuestion = CreatableQuestions[0];
+                ShowPageForProperty(currentQuestion);
+                this.Text = $"Редактирование теста: {updatableTest.Title}";
+            }
         }
 
         /// <summary>
@@ -281,9 +295,58 @@ namespace TestBossCreater.Pages
         private void button3_Click(object sender, EventArgs e)
         {
             // Если не заполнили корректно инфу про тест - не завершаем создание теста
-            if (!ShowDialogePageForTestInformation())
+            if (!ShowDialogePageForTestInformation(_inputMode))
                 return;
 
+            if (_inputMode == InputMode.Update)
+            {
+                var updatableTest = _context.Tests
+                    .Include(t => t.Questions)
+                    .FirstOrDefault(x => x.Id == CreatableTest.Id);
+
+                if (updatableTest == null)
+                {
+                    MessageBox.Show("Тест для обновления не найден в БД - ты что-то намутил");
+                    return;
+                }
+
+                // Удаляем вопросы, которых больше нет
+                var questionsToRemove = updatableTest.Questions
+                    .Where(oldQ => !CreatableQuestions.Any(newQ => newQ.Id == oldQ.Id))
+                    .ToList();
+
+                foreach (var q in questionsToRemove)
+                {
+                    _context.Questions.Remove(q);
+                }
+
+                // Обновляем существующие вопросы
+                foreach (var newQ in CreatableQuestions)
+                {
+                    var existingQ = updatableTest.Questions
+                        .FirstOrDefault(q => q.Id == newQ.Id);
+                    newQ.TestId = updatableTest.Id;
+                    if (existingQ != null)
+                    {
+                        _context.Questions.Update(existingQ);
+                        // обновляем другие поля по типам вопросов (если нужно)
+                    }
+                    else
+                    {
+                        // Новый вопрос — добавляем
+                        _context.Questions.Add(newQ);
+                    }
+                }
+
+                // Обновляем сам тест
+                _context.Tests.Update(updatableTest);
+
+                // Сохраняем всё сразу
+                _context.SaveChanges();
+                MessageBox.Show("Тест отредактирован");
+                NavigationService.ShowMainMenu(this); // передаётся экземляр текущего класса  CreateTest : Form
+                return;
+            }
             _context.Tests.Add(CreatableTest);
             _context.SaveChanges();
 
@@ -299,16 +362,10 @@ namespace TestBossCreater.Pages
         {
             toolTip1.SetToolTip(pictureBox4, "Прошлый вопрос");
             toolTip1.SetToolTip(pictureBox3, "Следующий вопрос");
+            toolTip1.SetToolTip(pictureBox1, "Добавить изображение для вопроса");
+            toolTip1.SetToolTip(pictureBox5, "Добавить изображение для вопроса");
 
-            var allTests = _context.Tests
-                .Include(t => t.Questions).FirstOrDefault();
-
-            if (allTests != null)
-            {
-                var allQuestion = _context.Questions.Where(x => x.TestId == allTests.Id);
-            }
             authorLabel.Text = $"Test Made By:\n {_currentUser}";
-            comboBox1.Items.AddRange(TypeQuestions.AllTypes);
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -518,10 +575,18 @@ namespace TestBossCreater.Pages
 
         }
 
-        public bool ShowDialogePageForTestInformation()
+        public bool ShowDialogePageForTestInformation(InputMode inputMode)
         {
             // Создаём диалоговое окно
             DialogePageForCreateTest dialogPage = new DialogePageForCreateTest();
+
+            if (inputMode == InputMode.Update)
+            {
+                dialogPage = new DialogePageForCreateTest(
+                    CreatableTest.Title,
+                    CreatableTest.Description,
+                    CreatableTest.NeededTrueAnswers);
+            }
 
             // Если окно закрывается с результатом "ОК"
             if (dialogPage.ShowDialog() == DialogResult.OK)
@@ -648,6 +713,27 @@ namespace TestBossCreater.Pages
                 }
                 dialogePageForAddImage.Dispose();
             }
+        }
+
+        private void toolTip1_Popup(object sender, PopupEventArgs e)
+        {
+
+        }
+
+        private void comboBox1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            e.DrawBackground();
+            string text = comboBox1.Items[e.Index].ToString();
+            e.Graphics.DrawString(text, e.Font, Brushes.Black, e.Bounds);
+
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                toolTip2.Show($"Подсказка для: {text}", comboBox1, e.Bounds.X, e.Bounds.Y + e.Bounds.Height, 2000);
+            }
+
+            e.DrawFocusRectangle();
         }
     }
 }

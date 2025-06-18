@@ -46,18 +46,26 @@ namespace TestBossCreater
             выбранныйТестToolStripMenuItem = new ToolStripMenuItem();
             всеТестыToolStripMenuItem = new ToolStripMenuItem();
             справкаToolStripMenuItem = new ToolStripMenuItem();
+            обАвтореToolStripMenuItem = new ToolStripMenuItem();
+            манипуляцииСТестомToolStripMenuItem = new ToolStripMenuItem();
+            редактированиеToolStripMenuItem = new ToolStripMenuItem();
+            удалениеТестаToolStripMenuItem = new ToolStripMenuItem();
+            pictureBox2 = new PictureBox();
+            pictureBox3 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxDataGrid).BeginInit();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(753, 312);
+            button1.Location = new Point(753, 301);
             button1.Name = "button1";
-            button1.Size = new Size(275, 54);
+            button1.Size = new Size(275, 63);
             button1.TabIndex = 0;
             button1.Text = "Пройти тест";
             button1.UseVisualStyleBackColor = true;
@@ -65,9 +73,9 @@ namespace TestBossCreater
             // 
             // button2
             // 
-            button2.Location = new Point(753, 383);
+            button2.Location = new Point(753, 370);
             button2.Name = "button2";
-            button2.Size = new Size(275, 52);
+            button2.Size = new Size(275, 65);
             button2.TabIndex = 1;
             button2.Text = "Создать тест";
             button2.UseVisualStyleBackColor = true;
@@ -133,7 +141,7 @@ namespace TestBossCreater
             // 
             menuStrip1.BackColor = SystemColors.Highlight;
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { статистикаToolStripMenuItem, справкаToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { статистикаToolStripMenuItem, справкаToolStripMenuItem, обАвтореToolStripMenuItem, манипуляцииСТестомToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1059, 28);
@@ -143,7 +151,7 @@ namespace TestBossCreater
             // статистикаToolStripMenuItem
             // 
             статистикаToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { пользователяToolStripMenuItem, тестаToolStripMenuItem });
-            статистикаToolStripMenuItem.ForeColor = SystemColors.ControlLight;
+            статистикаToolStripMenuItem.ForeColor = Color.White;
             статистикаToolStripMenuItem.Name = "статистикаToolStripMenuItem";
             статистикаToolStripMenuItem.Size = new Size(98, 24);
             статистикаToolStripMenuItem.Text = "Статистика";
@@ -179,16 +187,72 @@ namespace TestBossCreater
             // 
             // справкаToolStripMenuItem
             // 
-            справкаToolStripMenuItem.ForeColor = SystemColors.ButtonHighlight;
+            справкаToolStripMenuItem.ForeColor = Color.White;
             справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
             справкаToolStripMenuItem.Size = new Size(81, 24);
             справкаToolStripMenuItem.Text = "Справка";
+            справкаToolStripMenuItem.Click += справкаToolStripMenuItem_Click;
+            // 
+            // обАвтореToolStripMenuItem
+            // 
+            обАвтореToolStripMenuItem.ForeColor = SystemColors.Control;
+            обАвтореToolStripMenuItem.Name = "обАвтореToolStripMenuItem";
+            обАвтореToolStripMenuItem.Size = new Size(97, 24);
+            обАвтореToolStripMenuItem.Text = "Об Авторе";
+            обАвтореToolStripMenuItem.Click += обАвтореToolStripMenuItem_Click;
+            // 
+            // манипуляцииСТестомToolStripMenuItem
+            // 
+            манипуляцииСТестомToolStripMenuItem.BackColor = SystemColors.Desktop;
+            манипуляцииСТестомToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { редактированиеToolStripMenuItem, удалениеТестаToolStripMenuItem });
+            манипуляцииСТестомToolStripMenuItem.Font = new Font("Trebuchet MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            манипуляцииСТестомToolStripMenuItem.ForeColor = Color.Yellow;
+            манипуляцииСТестомToolStripMenuItem.Name = "манипуляцииСТестомToolStripMenuItem";
+            манипуляцииСТестомToolStripMenuItem.Size = new Size(319, 24);
+            манипуляцииСТестомToolStripMenuItem.Text = "Манипуляции с созданными Вами тестами";
+            манипуляцииСТестомToolStripMenuItem.Visible = false;
+            // 
+            // редактированиеToolStripMenuItem
+            // 
+            редактированиеToolStripMenuItem.Name = "редактированиеToolStripMenuItem";
+            редактированиеToolStripMenuItem.Size = new Size(248, 26);
+            редактированиеToolStripMenuItem.Text = "Редактирование теста";
+            редактированиеToolStripMenuItem.Click += редактированиеToolStripMenuItem_Click;
+            // 
+            // удалениеТестаToolStripMenuItem
+            // 
+            удалениеТестаToolStripMenuItem.Name = "удалениеТестаToolStripMenuItem";
+            удалениеТестаToolStripMenuItem.Size = new Size(248, 26);
+            удалениеТестаToolStripMenuItem.Text = "Удаление теста";
+            удалениеТестаToolStripMenuItem.Click += удалениеТестаToolStripMenuItem_Click;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = Properties.Resources.passTest;
+            pictureBox2.Location = new Point(761, 307);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(43, 50);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 6;
+            pictureBox2.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Image = Properties.Resources.createTest;
+            pictureBox3.Location = new Point(762, 377);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(43, 50);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 7;
+            pictureBox3.TabStop = false;
             // 
             // MainMenu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1059, 450);
+            Controls.Add(pictureBox3);
+            Controls.Add(pictureBox2);
             Controls.Add(groupBox1);
             Controls.Add(dataGridView1);
             Controls.Add(button2);
@@ -210,6 +274,8 @@ namespace TestBossCreater
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -231,5 +297,11 @@ namespace TestBossCreater
         private ToolStripMenuItem тестаToolStripMenuItem;
         private ToolStripMenuItem выбранныйТестToolStripMenuItem;
         private ToolStripMenuItem всеТестыToolStripMenuItem;
+        private ToolStripMenuItem обАвтореToolStripMenuItem;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox3;
+        private ToolStripMenuItem манипуляцииСТестомToolStripMenuItem;
+        private ToolStripMenuItem редактированиеToolStripMenuItem;
+        private ToolStripMenuItem удалениеТестаToolStripMenuItem;
     }
 }

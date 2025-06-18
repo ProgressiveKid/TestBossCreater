@@ -108,19 +108,13 @@ namespace TestBossCreater.Pages.DialogePage
 
         private void previusQuestionButton_Click(object sender, EventArgs e)
         {
-            ShowPreviusQuestion();
+
         }
 
 
         private void nexQuestionButton_Click(object sender, EventArgs e)
         {
-            ShowNextQuestionsAndGiveUserAnswer();
-            // При ответе на все вопросы при нажатии на кнопку "Следующий вопрос" - тест завершиться
-            if (CurPage == Questions.Count)
-            {
-                EndTest();
-                return;
-            }
+
         }
 
         /// <summary>
@@ -307,6 +301,27 @@ namespace TestBossCreater.Pages.DialogePage
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            ShowPreviusQuestion();
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            ShowNextQuestionsAndGiveUserAnswer();
+            // При ответе на все вопросы при нажатии на кнопку "Следующий вопрос" - тест завершиться
+            if (CurPage == Questions.Count)
+            {
+                EndTest();
+                return;
+            }
+        }
+
+        private void comboBox1_DrawItem(object sender, DrawItemEventArgs e)
         {
 
         }

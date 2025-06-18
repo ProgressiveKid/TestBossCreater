@@ -13,7 +13,27 @@ namespace TestBossCreater.Models
         /// <returns></returns>
         public override bool CheckAnswer()
         {
-            return CorrectTerm.Contains(UserOption, StringComparison.OrdinalIgnoreCase);
+            // Если у нас половина символов совпадает, тогда возвращаем true
+            if (string.IsNullOrWhiteSpace(CorrectTerm) || string.IsNullOrWhiteSpace(UserOption))
+                return false;
+
+            CorrectTerm = CorrectTerm.Trim().ToLower();
+            UserOption = UserOption.Trim().ToLower();
+
+            int minLength = Math.Min(CorrectTerm.Length, UserOption.Length);
+            int matchCount = 0;
+
+            for (int i = 0; i < minLength; i++)
+            {
+                if (CorrectTerm[i] == UserOption[i])
+                {
+                    matchCount++;
+                }
+            }
+
+            double similarity = (double)matchCount / CorrectTerm.Length;
+
+            return similarity >= 0.5;
         }
     }
 }
