@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PassTest));
             authorLabel = new Label();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
@@ -364,6 +365,7 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 20;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // label5
             // 
@@ -449,6 +451,7 @@
             Controls.Add(questionDescription);
             Controls.Add(previusQuestionButton);
             Controls.Add(nexQuestionButton);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "PassTest";
             Text = "Прохождение теста";
             Load += PassTest_Load_1;

@@ -19,8 +19,8 @@ public class AppDbContext : DbContext
         if (Database.CanConnect())
         {
             // для пересоздания бд, чтобы не накатывать миграции
-            //Database.EnsureDeleted();
-            //Database.EnsureCreated();
+           // Database.EnsureDeleted();
+           // Database.EnsureCreated();
         }
         else
         {
@@ -60,6 +60,7 @@ public class AppDbContext : DbContext
         {
             Id = 1,
             TestId = 1,
+            PathImage = "Resources/Images/demo_image.jpg",
             QuestionText = "Выбери значение от 1 до 10",
             MinValue = 1,
             MaxValue = 10
@@ -69,14 +70,17 @@ public class AppDbContext : DbContext
         {
             Id = 2,
             TestId = 1,
+            PathImage = "Resources/Images/addImage.jpg",
             QuestionText = "Что такое инкапсуляция?",
             CorrectTerm = "Сокрытие данных"
+            
         });
 
         modelBuilder.Entity<MultipleQuestion>().HasData(new MultipleQuestion
         {
             Id = 3,
             TestId = 1,
+            PathImage = "Resources/Images/addImage.jpg",
             QuestionText = "Что из ниже перечисленного — язык программирования?",
             OptionA = "HTML",
             OptionB = "CSS",

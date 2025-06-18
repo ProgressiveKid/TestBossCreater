@@ -81,7 +81,7 @@ namespace TestBossCreater.Pages
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
-            ShowPreviusQuestion();
+
         }
 
         /// <summary>
@@ -103,15 +103,22 @@ namespace TestBossCreater.Pages
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            if (!CreateQuestion())
+
+
+        }
+
+        public void showPicture(string path)
+        {
+            PathImage = string.Empty;
+            if (string.IsNullOrEmpty(path))
                 return;
 
-            CurPage++;
-            if (IsCurrentQuestionExistsInTest)
+            string relativePath = Path.GetRelativePath(AppDomain.CurrentDomain.BaseDirectory, path);
+            if (File.Exists(relativePath))
             {
-                ShowPageForProperty(CreatableQuestions[CurPage]);
+                PathImage = path;
+                pictureBox1.Image = new Bitmap(relativePath);
             }
-
         }
 
         /// <summary>
@@ -121,6 +128,7 @@ namespace TestBossCreater.Pages
         private void ShowPageForProperty(BaseQuestion question)
         {
             comboBox1.SelectedItem = question.Type;
+            showPicture(question.PathImage);
             switch (question)
             {
                 case MultipleQuestion multipleQuestion:
@@ -161,7 +169,6 @@ namespace TestBossCreater.Pages
                 CheckDumpUser();
                 return false;
             }
-
             // Проверка, чтобы проверить добавляем или редактируем существующий вопрос
             if (IsCurrentQuestionExistsInTest)
             {
@@ -187,6 +194,7 @@ namespace TestBossCreater.Pages
                 case TypeQuestions.MultipleChoise:
                     var createdMultipleQuestion = new MultipleQuestion()
                     {
+                        PathImage = PathImage,
                         QuestionText = questionDescription.Text,
                         OptionA = MultipleARichTextBox.Text,
                         OptionB = MultipleBRichTextBox.Text,
@@ -199,6 +207,7 @@ namespace TestBossCreater.Pages
                 case TypeQuestions.RangeChoise:
                     var createdRangeQuestion = new RangeQuestion()
                     {
+                        PathImage = PathImage,
                         QuestionText = questionDescription.Text,
                         BaseDeviation = string.IsNullOrEmpty(RangeDeviationRichTextBox.Text)
                         ? Convert.ToInt32(RangeDeviationRichTextBox.Text)
@@ -211,6 +220,7 @@ namespace TestBossCreater.Pages
                 case TypeQuestions.TermChoise:
                     var createdTermQuestion = new TermQuestion()
                     {
+                        PathImage = PathImage,
                         CorrectTerm = TermTextBoxUserAnswer.Text,
                         QuestionText = questionDescription.Text,
                     };
@@ -237,6 +247,7 @@ namespace TestBossCreater.Pages
             switch (question)
             {
                 case MultipleQuestion multipleQuestion:
+                    multipleQuestion.PathImage = PathImage;
                     multipleQuestion.QuestionText = questionDescription.Text;
                     multipleQuestion.OptionA = MultipleARichTextBox.Text;
                     multipleQuestion.OptionB = MultipleBRichTextBox.Text;
@@ -245,12 +256,14 @@ namespace TestBossCreater.Pages
                     multipleQuestion.CorrectOption = SelectedMultipleOption;
                     return multipleQuestion;
                 case RangeQuestion rangeQuestion:
+                    rangeQuestion.PathImage = PathImage;
                     rangeQuestion.QuestionText = questionDescription.Text;
                     rangeQuestion.BaseDeviation = Convert.ToInt32(RangeDeviationRichTextBox.Text);
                     rangeQuestion.MinValue = Convert.ToInt32(RangeFirstRichTextBox.Text);
                     rangeQuestion.MaxValue = Convert.ToInt32(RangeSecondRichTextBox.Text);
                     return rangeQuestion;
                 case TermQuestion termQuestion:
+                    termQuestion.PathImage = PathImage;
                     termQuestion.QuestionText = questionDescription.Text;
                     termQuestion.CorrectTerm = TermTextBoxUserAnswer.Text;
                     return termQuestion;
@@ -284,6 +297,9 @@ namespace TestBossCreater.Pages
 
         private void CreateTest_Load(object sender, EventArgs e)
         {
+            toolTip1.SetToolTip(pictureBox4, "Прошлый вопрос");
+            toolTip1.SetToolTip(pictureBox3, "Следующий вопрос");
+
             var allTests = _context.Tests
                 .Include(t => t.Questions).FirstOrDefault();
 
@@ -327,6 +343,7 @@ namespace TestBossCreater.Pages
 
         private void ClearPageForNewQuestion()
         {
+            pictureBox1.Image = null;
             questionDescription.Clear();
             foreach (TabPage tabPage in tabControl1.TabPages)
             {
@@ -346,6 +363,9 @@ namespace TestBossCreater.Pages
 
                     case RichTextBox richTextBox:
                         richTextBox.Clear();
+                        break;
+                    case TextBox textBox:
+                        textBox.Clear();
                         break;
 
                     case GroupBox or Panel or FlowLayoutPanel or TableLayoutPanel:
@@ -480,7 +500,17 @@ namespace TestBossCreater.Pages
 
         private void button4_Click(object sender, EventArgs e)
         {
-            NavigationService.ShowMainMenu(this); // передаётся экземляр текущего класса  CreateTest : Form
+            var result = MessageBox.Show(
+                    "Уверены, что хотите выйти без сохранения?",
+                    "Подтверждение",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+            if (result == DialogResult.Yes)
+            {
+                NavigationService.ShowMainMenu(this); // передаётся экземляр текущего класса CreateTest : Form
+            }
         }
 
         private void button5_Click_1(object sender, EventArgs e)
@@ -537,6 +567,86 @@ namespace TestBossCreater.Pages
                 {
                     ClearPageForNewQuestion();
                 }
+            }
+        }
+        public string PathImage { get; set; }
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            DialogePageForAddImageInTest dialogePageForAddImage = new DialogePageForAddImageInTest();
+            dialogePageForAddImage.ShowDialog();
+
+            // Если окно закрывается с результатом "ОК"
+            if (dialogePageForAddImage.ShowDialog() == DialogResult.OK)
+            {
+                // Получаем параметры из диалогового окна
+                if (dialogePageForAddImage.SelectedImage != null)
+                {
+                    string fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dialogePageForAddImage.ImagePath);
+                    pictureBox1.Image = Image.FromFile(fullPath);
+                    PathImage = dialogePageForAddImage.ImagePath;
+                }
+                dialogePageForAddImage.Dispose();
+            }
+
+        }
+
+        /// <summary>
+        /// Следующий вопрос
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            if (!CreateQuestion())
+                return;
+
+            CurPage++;
+            if (IsCurrentQuestionExistsInTest)
+            {
+                ShowPageForProperty(CreatableQuestions[CurPage]);
+            }
+        }
+
+        /// <summary>
+        /// Предыдущая страница
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            // Проверка, чтобы проверить добавляем или редактируем существующий вопрос
+            if (IsCurrentQuestionExistsInTest && CurPage >= 1)
+            {
+                // если тип вопроса не поменялся то редактируем вопрос 
+                var question = CreatableQuestions[CurPage];
+
+                if (question.Type == comboBox1.SelectedItem)
+                {
+                    var updatedQuestion = UpdateQuestion(question);
+                    CreatableQuestions[CurPage] = updatedQuestion;
+                    ClearPageForNewQuestion();
+                }
+                // Вместо редактирования удаляем старый вопрос и добавляем обновленный новый
+            }
+            ShowPreviusQuestion();
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+            DialogePageForAddImageInTest dialogePageForAddImage = new DialogePageForAddImageInTest();
+            dialogePageForAddImage.ShowDialog();
+
+            // Если окно закрывается с результатом "ОК"
+            if (dialogePageForAddImage.ShowDialog() == DialogResult.OK)
+            {
+                // Получаем параметры из диалогового окна
+                if (dialogePageForAddImage.SelectedImage != null)
+                {
+                    string fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dialogePageForAddImage.ImagePath);
+                    pictureBox1.Image = Image.FromFile(fullPath);
+                    PathImage = dialogePageForAddImage.ImagePath;
+                }
+                dialogePageForAddImage.Dispose();
             }
         }
     }

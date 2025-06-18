@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DialogePageForCreateTest));
             richTextBox1 = new RichTextBox();
             textBox1 = new TextBox();
             label1 = new Label();
@@ -112,6 +113,7 @@
             Controls.Add(label1);
             Controls.Add(textBox1);
             Controls.Add(richTextBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "DialogePageForCreateTest";
             Text = "Основная информация о тесте";
             ResumeLayout(false);

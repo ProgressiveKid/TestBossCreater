@@ -10,6 +10,10 @@ namespace TestBossCreater.Models
         [JsonIgnore]
         public string UserOption { get; set; } = string.Empty; // Выбор пользователя при прохождени теста
 
+        /// <summary>
+        /// Путь до картинки для вопроса
+        /// </summary>
+        public string PathImage { get; set; }
         public int TestId { get; set; }
         public Test Test { get; set; } = null!;
 

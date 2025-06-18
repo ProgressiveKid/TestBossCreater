@@ -55,4 +55,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Resources\ImagesForTest\" />
+  </ItemGroup>
+
 </Project>

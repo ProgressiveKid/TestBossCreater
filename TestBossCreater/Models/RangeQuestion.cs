@@ -19,6 +19,10 @@ namespace TestBossCreater.Models
 
         public override bool CheckAnswer()
         {
+            if (string.IsNullOrEmpty(UserOption))
+            {
+                UserOption = "0";
+            }
             int intIserAnswer = Convert.ToInt32(UserOption);
             return MinValue - BaseDeviation <= intIserAnswer &&
                 MaxValue + BaseDeviation >= intIserAnswer;

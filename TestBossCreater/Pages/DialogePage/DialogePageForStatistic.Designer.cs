@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DialogePageForStatistic));
             dataGridView1 = new DataGridView();
             button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -35,6 +36,7 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.BackgroundColor = SystemColors.ButtonFace;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(23, 27);
             dataGridView1.Name = "dataGridView1";
@@ -61,6 +63,7 @@
             ClientSize = new Size(984, 604);
             Controls.Add(button1);
             Controls.Add(dataGridView1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "DialogePageForStatistic";
             Text = "Статистика прохождения тестов";
             Load += DialogePageForStatistic_Load;

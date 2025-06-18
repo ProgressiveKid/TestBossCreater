@@ -79,6 +79,11 @@ namespace TestBossCreater.Pages.DialogePage
         private void ShowPageForProperty(BaseQuestion question)
         {
             comboBox1.SelectedItem = question.Type;
+            string fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, question.PathImage);
+            if (File.Exists(fullPath))
+            {
+                pictureBox1.Image = Image.FromFile(fullPath);
+            }
             switch (question)
             {
                 case MultipleQuestion multipleQuestion:
@@ -299,6 +304,11 @@ namespace TestBossCreater.Pages.DialogePage
             {
                 e.Handled = true; // Отменить ввод
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

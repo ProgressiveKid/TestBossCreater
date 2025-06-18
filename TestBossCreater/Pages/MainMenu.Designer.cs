@@ -30,6 +30,7 @@ namespace TestBossCreater
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
             button1 = new Button();
             button2 = new Button();
             dataGridView1 = new DataGridView();
@@ -74,6 +75,7 @@ namespace TestBossCreater
             // 
             // dataGridView1
             // 
+            dataGridView1.BackgroundColor = SystemColors.ButtonHighlight;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(30, 35);
             dataGridView1.Name = "dataGridView1";
@@ -193,10 +195,12 @@ namespace TestBossCreater
             Controls.Add(button1);
             Controls.Add(pictureBoxDataGrid);
             Controls.Add(menuStrip1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             Name = "MainMenu";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Главное меню";
+            FormClosed += MainMenu_FormClosed;
             Load += MainMenu_Load_1;
             Shown += MainMenu_Shown;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
