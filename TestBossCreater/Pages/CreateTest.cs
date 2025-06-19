@@ -328,7 +328,36 @@ namespace TestBossCreater.Pages
                     newQ.TestId = updatableTest.Id;
                     if (existingQ != null)
                     {
-                        _context.Questions.Update(existingQ);
+                        existingQ.QuestionText = newQ.QuestionText;
+                        existingQ.UserOption = newQ.UserOption;
+                        existingQ.PathImage = newQ.PathImage;
+                        switch (existingQ)
+                        {
+                            case MultipleQuestion multipleQuestion:
+                                var newQBultiple = newQ as MultipleQuestion;
+                                multipleQuestion.OptionA = newQBultiple.OptionA;
+                                multipleQuestion.OptionB = newQBultiple.OptionB;
+                                multipleQuestion.OptionC = newQBultiple.OptionC;
+                                multipleQuestion.OptionD = newQBultiple.OptionD;
+                                multipleQuestion.CorrectOption = newQBultiple.CorrectOption;
+                                break;
+                            case RangeQuestion rangeQuestion:
+                                var newQRange = newQ as RangeQuestion;
+
+                                rangeQuestion.BaseDeviation = newQRange.BaseDeviation;
+                                rangeQuestion.MinValue = newQRange.MinValue;
+                                rangeQuestion.MaxValue = newQRange.MaxValue;
+                                break;
+                            case TermQuestion termQuestion:
+                                var newQRange1 = newQ as TermQuestion;
+
+                                termQuestion.CorrectTerm = newQRange1.CorrectTerm;
+                                break;
+                            default:
+                                break;
+                        }
+                       // _context.Questions.Update(existingQ);
+
                         // обновляем другие поля по типам вопросов (если нужно)
                     }
                     else

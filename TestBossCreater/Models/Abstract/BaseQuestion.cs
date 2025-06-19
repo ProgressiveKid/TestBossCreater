@@ -13,7 +13,7 @@ namespace TestBossCreater.Models
         /// <summary>
         /// Путь до картинки для вопроса
         /// </summary>
-        public string PathImage { get; set; }
+        public string? PathImage { get; set; } = string.Empty;
         public int TestId { get; set; }
         public Test Test { get; set; } = null!;
 

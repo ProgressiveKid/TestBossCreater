@@ -19,8 +19,8 @@ public class AppDbContext : DbContext
         if (Database.CanConnect())
         {
             // для пересоздания бд, чтобы не накатывать миграции
-           // Database.EnsureDeleted();
-           // Database.EnsureCreated();
+            //Database.EnsureDeleted();
+            //Database.EnsureCreated();
         }
         else
         {
