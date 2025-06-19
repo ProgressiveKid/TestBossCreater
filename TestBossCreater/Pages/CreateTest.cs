@@ -647,8 +647,12 @@ namespace TestBossCreater.Pages
                 if (dialogePageForAddImage.SelectedImage != null)
                 {
                     string fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dialogePageForAddImage.ImagePath);
-                    pictureBox1.Image = Image.FromFile(fullPath);
-                    PathImage = dialogePageForAddImage.ImagePath;
+
+                    if (!string.IsNullOrEmpty(dialogePageForAddImage.ImagePath))
+                    {
+                        pictureBox1.Image = Image.FromFile(fullPath);
+                        PathImage = dialogePageForAddImage.ImagePath;
+                    }
                 }
                 dialogePageForAddImage.Dispose();
             }

@@ -145,7 +145,7 @@ namespace TestBossCreater
             await Task.Delay(5);
             string searchText = textBox1.Text.Trim();
             var foundUsers = _allUsers
-                .FirstOrDefault(u => u.UserName.Contains(searchText));
+                .FirstOrDefault(u => u.UserName == searchText);
             if (foundUsers != null)
             {
                 var testCreatedByUser = _allTests.Where(x => x.Creater == foundUsers.UserName).Select(x => x.Id);
